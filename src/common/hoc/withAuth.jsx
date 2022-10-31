@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 const withAuth = (Component) =>
-  function app({ ...pageProps }) {
+  function App({ ...pageProps }) {
     const router = useRouter();
     const { isAuth } = appStore();
 
