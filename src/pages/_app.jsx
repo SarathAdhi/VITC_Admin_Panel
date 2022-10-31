@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { ChakraProvider, extendTheme, Spinner } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { appStore } from "@utils/store";
 import { PageLoader } from "@components/PageLoader";
