@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { PageWrapper } from "./PageWrapper";
-import { Navbar } from "@components/Navbar";
+import { Navbar } from "@components/navbar";
 import { appStore } from "@utils/store";
 import { LeftSideBar } from "@components/LeftSideBar";
 import { Footer } from "@components/Footer";
