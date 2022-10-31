@@ -32,7 +32,9 @@ export const showSuccessAlert = (
   title,
   text,
   positiveButton = "Great",
-  positiveCallback
+  positiveCallback,
+  negativeButton,
+  negativeCallback
 ) => {
   showAlert({
     title,
@@ -40,6 +42,8 @@ export const showSuccessAlert = (
     positiveButton,
     icon: SwalIcon.Success,
     positiveCallback,
+    negativeButton,
+    negativeCallback,
   });
 };
 

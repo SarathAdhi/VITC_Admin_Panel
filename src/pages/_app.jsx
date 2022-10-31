@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import { ChakraProvider, extendTheme, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { appStore } from "@utils/store";
+import { PageLoader } from "@components/PageLoader";
 
 const theme = extendTheme({
   fonts: {
@@ -9,18 +10,6 @@ const theme = extendTheme({
     heading: `'Saira Extra Condensed', sans-serif`,
   },
 });
-
-const Loader = () => (
-  <div className="h-screen w-full grid place-content-center">
-    <Spinner
-      thickness="4px"
-      speed="0.65s"
-      emptyColor="gray.200"
-      color="blue.600"
-      size={"lg"}
-    />
-  </div>
-);
 
 const MyApp = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +26,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   return (
     <ChakraProvider theme={theme}>
-      {isLoading ? <Loader /> : <Component {...pageProps} />}
+      {isLoading ? <PageLoader /> : <Component {...pageProps} />}
     </ChakraProvider>
   );
 };

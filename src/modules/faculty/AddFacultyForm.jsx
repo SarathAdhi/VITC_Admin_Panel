@@ -7,10 +7,14 @@ import { EducationalDetails } from "./components/Form/EducationalDetails";
 import { ProjectDetails } from "./components/Form/ProjectDetails";
 import { PatentDetails } from "./components/Form/PatentDetails";
 import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaborations";
+import { useRouter } from "next/router";
+import { showSuccessAlert } from "@utils/alert";
 
 export const Divider = () => <StackDivider p={2} />;
 
 export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
+  const router = useRouter();
+
   return (
     <div className="grid gap-2 border">
       <div className="bg-[#1e4b8e] py-2 px-4">
@@ -25,6 +29,14 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
           if (!isUpdate) {
             reset();
+            showSuccessAlert(
+              "Faculty added successfully",
+              "",
+              "View Faculty",
+              () => router.push("/faculty"),
+              "Add more Faculty",
+              () => router.reload()
+            );
           }
         }}
         initialValues={initialValues}

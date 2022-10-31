@@ -1,3 +1,4 @@
+import { PageLoader } from "@components/PageLoader";
 import { H2 } from "@elements/Text";
 import withAuth from "@hoc/withAuth";
 import { PageLayout } from "@layouts/PageLayout";
@@ -41,7 +42,7 @@ const UpdateFaculty = () => {
 
   console.log(facultyDetails);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <PageLoader />;
 
   return (
     <PageLayout title={id}>

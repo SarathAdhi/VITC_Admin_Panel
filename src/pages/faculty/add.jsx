@@ -40,11 +40,9 @@ const handleSubmit = async ({ values, isUpdate }) => {
     return;
   }
 
-  const { message } = await axios.post("/faculty", {
+  await axios.post("/faculty", {
     ...newValues,
   });
-
-  showSuccessToast(message);
 };
 
 const InternalStaffForm = ({ initialValues, isUpdate = false }) => (

@@ -4,6 +4,7 @@ import { H6 } from "@elements/Text";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
 import { appStore } from "@utils/store";
+import { showSuccessToast } from "@utils/toast";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import * as y from "yup";
@@ -46,7 +47,7 @@ const Home = () => {
             const res = await axios.post("/admin/login", values);
 
             if (res?.message) {
-              alert(res.message);
+              showSuccessToast(res.message);
               setIsAuth(true);
 
               localStorage.setItem("token", res.token);

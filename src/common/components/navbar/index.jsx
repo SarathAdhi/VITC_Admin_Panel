@@ -62,8 +62,8 @@ export const Navbar = ({ setIsLeftSideBarOpen }) => {
   return (
     <header
       className={clsx(
-        "z-50 md:absolute w-full h-auto md:h-12 bg-[#004c93] p-1 flex flex-col md:flex-row items-center",
-        !isAuth ? "justify-around" : "sm:px-4 justify-between"
+        "z-50 md:absolute w-full h-auto bg-[#004c93] p-1 flex flex-col md:flex-row items-center",
+        !isAuth ? "justify-around md:h-auto" : "sm:px-4 justify-between md:h-12"
       )}
     >
       {!isAuth ? (

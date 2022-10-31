@@ -1,4 +1,4 @@
-import { showErrorToast } from "@utils/toast";
+import { showErrorAlert } from "@utils/alert";
 import Axios from "axios";
 
 const axios = Axios.create({
@@ -11,7 +11,7 @@ const axios = Axios.create({
 axios.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    alert(
+    showErrorAlert(
       JSON.stringify(error?.response?.data?.error) ||
         "Could not connect to server"
     );

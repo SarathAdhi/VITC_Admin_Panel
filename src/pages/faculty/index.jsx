@@ -24,7 +24,7 @@ const ViewFaculties = () => {
 
   return (
     <PageLayout>
-      <div className="mt-5 md:mt-0 w-full p-4 bg-[#f1f1f1] grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5">
+      <div className="mt-5 md:mt-0 w-full p-4 bg-[#f1f1f1] grid justify-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {faculties.map((faculty) => (
           <div key={faculty.name} className="w-full sm:w-60">
             <div className="relative w-full h-60">
