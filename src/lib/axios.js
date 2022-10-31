@@ -11,8 +11,9 @@ const axios = Axios.create({
 axios.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    showErrorToast(
-      error?.response?.data?.error || "Could not connect to server"
+    alert(
+      JSON.stringify(error?.response?.data?.error) ||
+        "Could not connect to server"
     );
 
     return Promise.reject(error?.response?.data);

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import React from "react";
 import { Formik } from "formik";
-import { Button } from "@chakra-ui/react";
 
 const Form = ({
   className,
@@ -31,49 +30,23 @@ const Form = ({
       }}
     >
       {({ handleSubmit, isSubmitting, handleReset, isValid, dirty }) => (
-        <form
-          className={clsx("grid gap-y-3 w-full", className)}
-          onSubmit={handleSubmit}
-          {...props}
-        >
-          {children}
+        <form onSubmit={handleSubmit} {...props}>
+          <div className={clsx("grid gap-y-3 w-full", className)}>
+            {children}
+          </div>
 
           {(submitButton || resetButton) && (
-            <div className={clsx("flex mt-3 gap-x-4", actionClassName)}>
+            <div className={clsx("bg-[#00000008] px-4 py-2", actionClassName)}>
               {submitButton && (
-                <Button
-                  type="submit"
-                  bgColor={"#059862"}
-                  color={"white"}
-                  _hover={{ bgColor: "#4caf50" }}
-                  fontWeight={"semibold"}
-                  isLoading={isSubmitting}
-                  leftIcon={
-                    submitButton.Icon && (
-                      <submitButton.Icon className="w-5 h-5" />
-                    )
-                  }
-                  // disabled={!(isValid && dirty)}
-                >
+                <button type="submit" className={submitButton.className}>
                   {submitButton.title}
-                </Button>
+                </button>
               )}
 
               {resetButton && (
-                <Button
-                  type="reset"
-                  bgColor={"red"}
-                  _hover={{ bgColor: "red" }}
-                  color={"white"}
-                  fontWeight={"semibold"}
-                  onClick={handleReset}
-                  disabled={isSubmitting}
-                  leftIcon={
-                    resetButton.Icon && <resetButton.Icon className="w-5 h-5" />
-                  }
-                >
+                <button type="reset" className={resetButton.className}>
                   {resetButton.title}
-                </Button>
+                </button>
               )}
             </div>
           )}
@@ -84,9 +57,25 @@ const Form = ({
 };
 
 Form.Row = ({ className, children }) => (
+  <div className={clsx("grid gap-3", className)}>{children}</div>
+);
+
+Form.Grid2 = ({ className, children }) => (
+  <div className={clsx("grid gap-3 sm:grid-cols-2 lg:grid-cols-2", className)}>
+    {children}
+  </div>
+);
+
+Form.Grid3 = ({ className, children }) => (
+  <div className={clsx("grid gap-3 sm:grid-cols-2 lg:grid-cols-3", className)}>
+    {children}
+  </div>
+);
+
+Form.Grid4 = ({ className, children }) => (
   <div
     className={clsx(
-      "grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4",
+      "grid gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4",
       className
     )}
   >
@@ -94,11 +83,9 @@ Form.Row = ({ className, children }) => (
   </div>
 );
 
-Form.Grid = ({ className, children }) => (
-  <div className={clsx("grid gap-3 sm:grid-cols-2", className)}>{children}</div>
-);
-
 Form.Row.displayName = "Form.Row";
-Form.Grid.displayName = "Form.Grid";
+Form.Grid2.displayName = "Form.Grid2";
+Form.Grid3.displayName = "Form.Grid3";
+Form.Grid4.displayName = "Form.Grid4";
 
 export default Form;

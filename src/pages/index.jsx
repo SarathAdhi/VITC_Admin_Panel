@@ -1,19 +1,13 @@
-import { LinkedItem } from "@components/LinkedItem";
-import { PageLayout } from "@layouts/PageLayout";
-import React from "react";
+import withAuth from "@hoc/withAuth";
+import { appStore } from "@utils/store";
+import { useRouter } from "next/router";
 
 const Home = () => {
-  return (
-    <PageLayout className="flex gap-5">
-      <LinkedItem className="border-2 p-2 rounded-sm" href="/faculty/add">
-        Add Faculty
-      </LinkedItem>
+  const router = useRouter();
+  const { isAuth } = appStore();
 
-      <LinkedItem className="border-2 p-2 rounded-sm" href="/faculty">
-        View all Faculties
-      </LinkedItem>
-    </PageLayout>
-  );
+  if (isAuth) router.replace("/dashboard");
+  else router.replace("/admin");
 };
 
-export default Home;
+export default withAuth(Home);

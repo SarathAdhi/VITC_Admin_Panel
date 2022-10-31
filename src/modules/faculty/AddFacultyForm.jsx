@@ -1,294 +1,185 @@
-import React, { useState } from "react";
-import Form from "@elements/Form";
-import {
-  PlusCircleIcon,
-  RefreshIcon,
-  TrashIcon,
-} from "@heroicons/react/outline";
-import Input from "@components/Input";
-import { FieldArray } from "formik";
-import { Button, StackDivider } from "@chakra-ui/react";
-import { H5 } from "@components/Text";
-import clsx from "clsx";
-import axios from "@lib/axios";
-import { showSuccessToast } from "@utils/toast";
+import React from "react";
+import Form from "@components/Form";
+import Input from "@elements/Input";
+import { StackDivider } from "@chakra-ui/react";
+import { H4, H5, P } from "@elements/Text";
+import { EducationalDetails } from "./components/Form/EducationalDetails";
+import { ProjectDetails } from "./components/Form/ProjectDetails";
+import { PatentDetails } from "./components/Form/PatentDetails";
+import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaborations";
 
-const Divider = () => <StackDivider p={2} />;
-
-async function deleteEducationalDetails(id) {
-  console.log(id);
-  if (id) {
-    const { message } = await axios.delete(
-      `/faculty/educational-details/${id}`
-    );
-
-    showSuccessToast(message);
-  }
-}
-
-async function deletePatentPublishedDetails(id) {
-  if (id) {
-    const { message } = await axios.delete(
-      `/faculty/patent-published-details/${id}`
-    );
-
-    showSuccessToast(message);
-  }
-}
+export const Divider = () => <StackDivider p={2} />;
 
 export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
-  const [educationalDetailsCount, setEducationalDetailsCount] = useState(
-    initialValues.educationalDetails.length
-  );
-
-  const [patentPublishedDetailsCount, setPatentPublishedDetailsCount] =
-    useState(initialValues.patentPublishedDetails.length);
-
   return (
-    <Form
-      onSubmit={(values, reset) => {
-        handleSubmit({ values });
+    <div className="grid gap-2 border">
+      <div className="bg-[#1e4b8e] py-2 px-4">
+        <H4 className="text-white">Faculty Profile</H4>
+      </div>
 
-        if (!isUpdate) {
-          reset();
-          setEducationalDetailsCount(1);
-          setPatentPublishedDetailsCount(1);
-        }
-      }}
-      initialValues={initialValues}
-      submitButton={{
-        title: isUpdate ? "Update Faculty" : "Add Faculty",
-        Icon: isUpdate ? RefreshIcon : PlusCircleIcon,
-      }}
-      resetButton={{ title: "Clear", Icon: TrashIcon }}
-    >
-      <Form.Grid>
+      <Form
+        className="px-3"
+        actionClassName="flex justify-end"
+        onSubmit={(values, reset) => {
+          handleSubmit({ values });
+
+          if (!isUpdate) {
+            reset();
+          }
+        }}
+        initialValues={initialValues}
+        submitButton={{
+          title: isUpdate ? "Update Faculty" : "Save Profile",
+          className: "bg-[#408557] text-white px-4 py-2",
+        }}
+      >
+        <P className="!font-semibold">
+          Note: <span className="text-red-500">*</span> are Mandatory |{" "}
+          <span className="text-red-500">
+            Do not enter NIT,-,NA ffor no data available fields, leave them
+            blank.
+          </span>
+        </P>
+
+        <div className="bg-[#6e747d] p-2">
+          <H5 className="!font-semibold text-white">Employee Details</H5>
+        </div>
+
+        <Form.Grid3>
+          <Input label="Employee Id" name="id" required disabled={isUpdate} />
+          <Input
+            label="Salutation"
+            name="salutation"
+            required
+            disabled={isUpdate}
+          />
+
+          <Input label="Name" name="name" required />
+          <Input label="Designation" name="designation" required />
+
+          <Input label="School / Center" name="school" required />
+          <Input label="Department" name="department" required />
+
+          <Input label="Email" name="email" disabled={isUpdate} />
+        </Form.Grid3>
+
+        <Divider />
+
+        <EducationalDetails initialValues={initialValues} isUpdate={isUpdate} />
+
+        <Divider />
+
+        <div className="bg-[#6e747d] p-2">
+          <H5 className="!font-semibold text-white">
+            Post Doctoral Experience Details
+          </H5>
+        </div>
+
         <Input
-          label="Faculty ID"
-          name="id"
-          placeholder="Enter the Faculty ID"
-          disabled={isUpdate}
-        />
-        <Input
-          label="Faculty Name"
-          name="name"
-          placeholder="Enter Faculty name"
+          className="w-full"
+          label="Post Doctoral Experience (if any)"
+          name="postDoctoralExperience"
         />
 
-        <Input
-          label="Faculty Email"
-          name="email"
-          placeholder="Enter faculty email"
-          disabled={isUpdate}
-        />
-        <Input label="Faculty Image" name="image" placeholder="Faculty image" />
+        <Divider />
 
-        <Input
-          label="Faculty Designation"
-          name="designation"
-          placeholder="Enter faculty designation"
-        />
-        <Input
-          label="Faculty Department"
-          name="department"
-          placeholder="Enter Faculty department"
-        />
+        <div className="bg-[#6e747d] p-2">
+          <H5 className="!font-semibold text-white">Research Details</H5>
+        </div>
 
-        <Input
-          label="Faculty school"
-          name="school"
-          placeholder="Enter Faculty school"
-        />
-      </Form.Grid>
-
-      <Divider />
-
-      <FieldArray name="educationalDetails">
-        {(arrayHelpers) => (
-          <div className="grid gap-5 justify-items-start">
-            <Form.Grid
-              className={clsx(
-                "w-full",
-                educationalDetailsCount === 1 && "!grid-cols-1"
-              )}
-            >
-              {[...Array(educationalDetailsCount)].map((_, index) => (
-                <div
-                  key={"educationalDetails" + index}
-                  className="w-full grid gap-2"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <H5 className="underline">
-                      Faculty Educational Details {index + 1}
-                    </H5>
-
-                    {(index !== 0 || isUpdate) && (
-                      <button
-                        className="underline"
-                        onClick={() => {
-                          if (isUpdate) {
-                            deleteEducationalDetails(
-                              initialValues.educationalDetails[index]?.id
-                            );
-                          }
-
-                          setEducationalDetailsCount((pre) => pre - 1);
-                          arrayHelpers.remove(index);
-                        }}
-                      >
-                        Remove
-                      </button>
-                    )}
-                  </div>
-
-                  <Input
-                    className="w-full"
-                    label="University"
-                    name={`educationalDetails[${index}].university`}
-                    placeholder="Ex: VIT"
-                  />
-
-                  <Input
-                    className="w-full"
-                    label="Degree"
-                    name={`educationalDetails[${index}].degree`}
-                    placeholder="Ex: PhD, MD"
-                  />
-
-                  <Input
-                    type="number"
-                    className="w-full"
-                    label="Graduated year"
-                    name={`educationalDetails[${index}].graduatedIn`}
-                    placeholder="Ex: 2019"
-                  />
-                </div>
-              ))}
-            </Form.Grid>
-
-            <Button
-              leftIcon={<PlusCircleIcon className="w-6 h-6" />}
-              onClick={() => setEducationalDetailsCount((pre) => pre + 1)}
-            >
-              Add Educational Details
-            </Button>
+        <Form.Grid3>
+          <div>
+            <Input
+              className="w-full"
+              label="Specialization"
+              name="researchDetails.specialization"
+            />
+            {"[Specify a max. of 5 areas with comma]"}
           </div>
-        )}
-      </FieldArray>
 
-      <Divider />
+          <Input
+            className="w-full"
+            label="ORCID ID"
+            name="researchDetails.orcid"
+            required
+          />
 
-      <H5 className="underline">Faculty Research Details</H5>
-      <Form.Grid>
-        <Input
-          className="w-full"
-          label="Specialization"
-          name="researchDetails.specialization"
-          placeholder="Ex: ML, AI. Note: Add comma separated values"
+          <Input
+            className="w-full"
+            label="Scopus ID"
+            name="researchDetails.scopus"
+            required
+          />
+
+          <Input
+            type="number"
+            className="w-full"
+            label="h Index"
+            name="researchDetails.hIndex"
+          />
+
+          <Input
+            className="w-full"
+            label="Google Scholar ID"
+            name="researchDetails.googleScholar"
+            required
+          />
+
+          <Input
+            type="number"
+            className="w-full"
+            label="i10 Index"
+            name="researchDetails.i10Index"
+          />
+        </Form.Grid3>
+
+        <Divider />
+
+        <ProjectDetails initialValues={initialValues} isUpdate={isUpdate} />
+
+        <Divider />
+
+        <PatentDetails initialValues={initialValues} isUpdate={isUpdate} />
+
+        <Divider />
+
+        <AwardsAndCollaborations
+          initialValues={initialValues}
+          isUpdate={isUpdate}
         />
 
-        <Input
-          className="w-full"
-          label="ORCID"
-          name="researchDetails.orcid"
-          placeholder="https://orcid.org/<id>"
-        />
+        <Divider />
 
-        <Input
-          className="w-full"
-          label="Scopus"
-          name="researchDetails.scopus"
-          placeholder=" https://www.scopus.com/..."
-        />
+        <div className="bg-[#6e747d] p-2">
+          <H5 className="!font-semibold text-white">Other Details</H5>
+        </div>
 
-        <Input
-          className="w-full"
-          label="Google Scholar"
-          name="researchDetails.googleScholar"
-          placeholder="https://scholar.google.com/..."
-        />
+        <Form.Grid2>
+          <Input
+            className="w-full"
+            label="Editorial Experience (if any)"
+            name="editorialExperience"
+          />
 
-        <Input
-          type="number"
-          className="w-full"
-          label="h-Index"
-          name="researchDetails.hIndex"
-          placeholder="h-Index"
-        />
+          <Input
+            className="w-full"
+            label="Personal Website (if any)"
+            name="personalWebsite"
+          />
+        </Form.Grid2>
 
-        <Input
-          type="number"
-          className="w-full"
-          label="i10-Index"
-          name="researchDetails.i10Index"
-          placeholder="i10-Index"
-        />
-      </Form.Grid>
+        <Divider />
 
-      <Divider />
+        <div className="bg-[#6e747d] p-2">
+          <H5 className="!font-semibold text-white">Photo Link</H5>
+        </div>
 
-      <FieldArray name="patentPublishedDetails">
-        {(arrayHelpers) => (
-          <div className="grid gap-5 justify-items-start">
-            <Form.Grid
-              className={clsx(
-                "w-full",
-                patentPublishedDetailsCount === 1 && "!grid-cols-1"
-              )}
-            >
-              {[...Array(patentPublishedDetailsCount)].map((_, index) => (
-                <div
-                  key={"patentPublishedDetails" + index}
-                  className="w-full grid gap-2"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <H5 className="underline">
-                      Patent Published Details {index + 1}
-                    </H5>
+        <Form.Grid2>
+          <Input label="Photo Link" name="image" />
+        </Form.Grid2>
 
-                    <button
-                      className="underline"
-                      onClick={() => {
-                        if (isUpdate) {
-                          deletePatentPublishedDetails(
-                            initialValues.patentPublishedDetails[index]?.id
-                          );
-                        }
-
-                        setPatentPublishedDetailsCount((pre) => pre - 1);
-                        arrayHelpers.remove(index);
-                      }}
-                    >
-                      Remove
-                    </button>
-                  </div>
-
-                  <Input
-                    className="w-full"
-                    label="Title"
-                    name={`patentPublishedDetails[${index}].title`}
-                    placeholder="Enter the Title"
-                  />
-
-                  <Input
-                    className="w-full"
-                    label="Application number"
-                    name={`patentPublishedDetails[${index}].applicationNumber`}
-                    placeholder="Enter the Application Number"
-                  />
-                </div>
-              ))}
-            </Form.Grid>
-
-            <Button
-              leftIcon={<PlusCircleIcon className="w-6 h-6" />}
-              onClick={() => setPatentPublishedDetailsCount((pre) => pre + 1)}
-            >
-              Add Patent Published
-            </Button>
-          </div>
-        )}
-      </FieldArray>
-    </Form>
+        <Divider />
+      </Form>
+    </div>
   );
 };

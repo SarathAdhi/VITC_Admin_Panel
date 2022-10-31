@@ -1,36 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { PageWrapper } from "./PageWrapper";
-import { Navbar } from "@elements/navbar";
+import { Navbar } from "@components/Navbar";
+import { appStore } from "@utils/store";
+import { LeftSideBar } from "@components/LeftSideBar";
+import { Footer } from "@components/Footer";
 
-export const PageLayout = ({
-  title = "",
-  children,
-  className = "",
-  LeftSideBar = null,
-  breadcrumbItem = [],
-}) => {
+export const PageLayout = ({ title = "", children, className = "" }) => {
+  const { isAuth } = appStore();
+  const [isLeftSideBarOpen, setIsLeftSideBarOpen] = useState(true);
+
   return (
     <PageWrapper title={title} className="flex flex-col items-center">
-      <Navbar breadcrumbItem={breadcrumbItem} />
+      <Navbar setIsLeftSideBarOpen={setIsLeftSideBarOpen} />
 
-      <div className="w-full max-w-[1440px] p-2 sm:p-5">
-        <div className={LeftSideBar && "gap-5 md:grid md:grid-cols-14"}>
-          {LeftSideBar && (
-            <div className="z-40 sticky top-2 md:col-span-4 xl:col-span-3 ">
-              {LeftSideBar}
-            </div>
+      <div
+        className={clsx(
+          "flex-1 w-full",
+          isAuth && isLeftSideBarOpen
+            ? "md:grid md:grid-cols-14"
+            : "flex flex-col"
+        )}
+      >
+        {/* pt-16 for topnavbar, till md its absolute */}
+        {isAuth && isLeftSideBarOpen && (
+          <LeftSideBar className="md:pt-16 z-40 md:sticky top-0 md:col-span-4 xl:col-span-3 " />
+        )}
+
+        {/* mt-12 for topnavbar, till md its absolute */}
+        <div
+          className={clsx(
+            "w-full flex-1 flex flex-col gap-5 md:mt-12",
+            isAuth && "col-span-10 xl:col-span-11"
           )}
+        >
+          <div className={clsx("w-full flex-1 p-4", className)}>{children}</div>
 
-          <div
-            className={clsx(
-              "w-full",
-              LeftSideBar && "col-span-10 xl:col-span-11",
-              className
-            )}
-          >
-            {children}
-          </div>
+          {isAuth && <Footer />}
         </div>
       </div>
     </PageWrapper>

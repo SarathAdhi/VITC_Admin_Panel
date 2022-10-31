@@ -8,38 +8,5 @@ html,
 body {
   scroll-behavior: smooth !important;
 
-  font-family: "Saira Extra Condensed", sans-serif !important;
-}
-
-.title_border {
-  font-size: 30px;
-  position: relative;
-  padding-bottom: 5px;
-  display: block;
-  margin-bottom: 5px;
-  color: #2f76a4;
-  font-weight: 600;
-}
-
-.title_border:before {
-  width: 73px;
-  height: 2px;
-  background: #353e6d;
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.title_border:after {
-  width: 26px;
-  height: 5px;
-  background: #353e6d;
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -1px;
-  left: 7px;
-  border-radius: 20%;
+  font-family: Calibri, sans-serif !important;
 }

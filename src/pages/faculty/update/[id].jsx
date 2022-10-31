@@ -1,3 +1,5 @@
+import { H2 } from "@elements/Text";
+import withAuth from "@hoc/withAuth";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
 import { useRouter } from "next/router";
@@ -23,12 +25,14 @@ const UpdateFaculty = () => {
           specialization: faculty.researchDetails.specialization.join(","),
         },
       });
-      setIsLoading(false);
     } catch ({ error }) {
+      console.log({ error });
       if (error) {
         // router.replace("/");
       }
     }
+
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -40,10 +44,14 @@ const UpdateFaculty = () => {
   if (isLoading) return <div>Loading...</div>;
 
   return (
-    <PageLayout>
-      <InternalStaffForm initialValues={facultyDetails} isUpdate />
+    <PageLayout title={id}>
+      {!facultyDetails ? (
+        <H2 className="text-center">Faculty not found with ID: {id}</H2>
+      ) : (
+        <InternalStaffForm initialValues={facultyDetails} isUpdate />
+      )}
     </PageLayout>
   );
 };
 
-export default UpdateFaculty;
+export default withAuth(UpdateFaculty);

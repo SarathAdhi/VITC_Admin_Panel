@@ -1,4 +1,4 @@
-import { LinkedItem } from "@components/LinkedItem";
+import { LinkedItem } from "@elements/LinkedItem";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
 import Image from "next/image";

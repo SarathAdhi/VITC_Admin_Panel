@@ -3,37 +3,8 @@ import React from "react";
 import { AddFacultyForm } from "@modules/faculty/AddFacultyForm";
 import { showSuccessToast } from "@utils/toast";
 import axios from "@lib/axios";
-
-const _initialValues = {
-  id: "",
-  name: "",
-  email: "",
-  image: "",
-  designation: "",
-  department: "",
-  school: "",
-  educationalDetails: [
-    {
-      degree: "",
-      university: "",
-      graduatedIn: "",
-    },
-  ],
-  researchDetails: {
-    specialization: [],
-    orcid: "",
-    scopus: "",
-    googleScholar: "",
-    hIndex: 0,
-    i10Index: 0,
-  },
-  patentPublishedDetails: [
-    {
-      title: "",
-      applicationNumber: "",
-    },
-  ],
-};
+import withAuth from "@hoc/withAuth";
+import { initialFacultyValues } from "@utils/initialValues";
 
 const handleSubmit = async ({ values, isUpdate }) => {
   const newValues = {
@@ -56,6 +27,8 @@ const handleSubmit = async ({ values, isUpdate }) => {
           : [],
     },
   };
+
+  console.log(newValues);
 
   if (isUpdate) {
     const { message } = await axios.put(`/faculty/${values.uuid}`, {
@@ -82,9 +55,9 @@ const InternalStaffForm = ({ initialValues, isUpdate = false }) => (
   />
 );
 
-const AddStaff = ({ initialValues = _initialValues }) => {
+const AddStaff = ({ initialValues = initialFacultyValues }) => {
   return (
-    <PageLayout>
+    <PageLayout title="Add Faculty">
       <InternalStaffForm initialValues={initialValues} />
     </PageLayout>
   );
@@ -92,4 +65,4 @@ const AddStaff = ({ initialValues = _initialValues }) => {
 
 export { InternalStaffForm };
 
-export default AddStaff;
+export default withAuth(AddStaff);
