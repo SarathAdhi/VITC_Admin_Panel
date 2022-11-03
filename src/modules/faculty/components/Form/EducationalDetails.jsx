@@ -83,8 +83,9 @@ export const EducationalDetails = ({ initialValues, isUpdate }) => {
                     />
 
                     <Input
-                      type="date"
                       className="w-full"
+                      placeholder="Y Y Y Y"
+                      maxLength={4}
                       label="Passed Out Year"
                       name={`educationalDetails[${index}].graduatedYear`}
                       required

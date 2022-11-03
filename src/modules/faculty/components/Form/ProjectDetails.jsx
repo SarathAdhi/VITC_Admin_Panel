@@ -11,7 +11,7 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
   const [
     onGoingConsultancyProjectDetailsCount,
     setOnGoingConsultancyProjectDetailsCount,
-  ] = useState(initialValues.consultancyProjectDetails.length || 1);
+  ] = useState(initialValues.ongoingConsultancyProjectDetails.length || 1);
 
   const [
     completedConsultancyProjectDetailsCount,
@@ -51,7 +51,7 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
         </div>
       </div>
 
-      <FieldArray name="onGoingConsultancyProjectDetails">
+      <FieldArray name="ongoingConsultancyProjectDetails">
         {(arrayHelpers) => (
           <div className="grid gap-5 justify-items-start">
             <Form.Row
@@ -63,7 +63,7 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
               {[...Array(onGoingConsultancyProjectDetailsCount)].map(
                 (_, index) => (
                   <div
-                    key={"onGoingConsultancyProjectDetails" + index}
+                    key={"ongoingConsultancyProjectDetails" + index}
                     className="w-full grid gap-2"
                   >
                     <div className="flex items-center justify-between gap-2">
@@ -86,13 +86,13 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
                       <Input
                         className="w-full"
                         label="Ongoing Title"
-                        name={`consultancyProjectDetails[${index}].title`}
+                        name={`ongoingConsultancyProjectDetails[${index}].title`}
                       />
 
                       <Input
                         className="w-full"
                         label="Ongoing Funding Agency"
-                        name={`consultancyProjectDetails[${index}].fundingAgency`}
+                        name={`ongoingConsultancyProjectDetails[${index}].fundingAgency`}
                       />
                     </Form.Grid2>
                   </div>

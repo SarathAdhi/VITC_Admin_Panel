@@ -93,8 +93,9 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
                     />
 
                     <Input
-                      type="date"
                       className="w-full"
+                      placeholder="Y Y Y Y"
+                      maxLength="4"
                       label="Year"
                       name={`bookPublishedDetails[${index}].year`}
                     />

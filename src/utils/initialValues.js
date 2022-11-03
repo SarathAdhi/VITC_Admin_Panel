@@ -24,7 +24,7 @@ export const initialFacultyValues = {
     hIndex: 0,
     i10Index: 0,
   },
-  consultancyProjectDetails: [
+  ongoingConsultancyProjectDetails: [
     // {
     //   title: "",
     //   fundingAgency: "",
