@@ -9,6 +9,8 @@ import { PatentDetails } from "./components/Form/PatentDetails";
 import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaborations";
 import { useRouter } from "next/router";
 import { showSuccessAlert } from "@utils/alert";
+import Select from "@elements/Select";
+import { DEPARTMENT } from "@utils/constants";
 
 export const Divider = () => <StackDivider p={2} />;
 
@@ -70,7 +72,13 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           <Input label="Designation" name="designation" required />
 
           <Input label="School / Center" name="school" required />
-          <Input label="Department" name="department" required />
+          {/* <Input label="Department" name="department" required /> */}
+          <Select
+            label="Department"
+            name="department"
+            required
+            options={DEPARTMENT}
+          />
 
           <Input label="Email" name="email" disabled={isUpdate} />
         </Form.Grid3>
