@@ -30,19 +30,19 @@ const handleSubmit = async ({ values, isUpdate }) => {
 
   console.log(newValues);
 
-  // if (isUpdate) {
-  //   const { message } = await axios.put(`/faculty/${values.uuid}`, {
-  //     ...newValues,
-  //   });
+  if (isUpdate) {
+    const { message } = await axios.put(`/faculty/${values.uuid}`, {
+      ...newValues,
+    });
 
-  //   showSuccessToast(message);
+    showSuccessToast(message);
 
-  //   return;
-  // }
+    return;
+  }
 
-  // await axios.post("/faculty", {
-  //   ...newValues,
-  // });
+  await axios.post("/faculty", {
+    ...newValues,
+  });
 };
 
 const InternalStaffForm = ({ initialValues, isUpdate = false }) => (
