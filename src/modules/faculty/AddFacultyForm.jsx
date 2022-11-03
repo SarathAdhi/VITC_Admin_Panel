@@ -77,6 +77,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
             label="Department"
             name="department"
             required
+            value={DEPARTMENT[0]}
             options={DEPARTMENT}
           />
 

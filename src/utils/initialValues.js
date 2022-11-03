@@ -1,3 +1,5 @@
+import { DEPARTMENT } from "./constants";
+
 export const initialFacultyValues = {
   id: "",
   salutation: "",
@@ -5,7 +7,7 @@ export const initialFacultyValues = {
   email: "",
   image: "",
   designation: "",
-  department: "",
+  department: DEPARTMENT[0],
   school: "",
   educationalDetails: [
     {
