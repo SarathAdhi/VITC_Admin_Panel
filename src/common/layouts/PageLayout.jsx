@@ -30,7 +30,7 @@ export const PageLayout = ({ title = "", children, className = "" }) => {
         {/* mt-12 for topnavbar, till md its absolute */}
         <div
           className={clsx(
-            "w-full flex-1 flex flex-col gap-5 md:mt-12",
+            "w-full flex-1 flex flex-col gap-5 mt-14 md:mt-12",
             isAuth && "col-span-10 xl:col-span-11"
           )}
         >

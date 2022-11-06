@@ -1,6 +1,5 @@
 import Form from "@components/Form";
 import Input from "@elements/Input";
-import { H6 } from "@elements/Text";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
 import { appStore } from "@utils/store";
@@ -10,12 +9,12 @@ import React, { useEffect } from "react";
 import * as y from "yup";
 
 const schema = y.object().shape({
-  username: y.string().required("Enter the Username"),
+  id: y.string().required("Enter the Username"),
   password: y.string().required("Enter the Password"),
 });
 
 const initialValue = {
-  username: "",
+  id: "",
   password: "",
 };
 
@@ -29,22 +28,24 @@ const Home = () => {
   }, []);
 
   return (
-    <PageLayout title="Admin Login" className="flex-1 flex justify-center">
-      <div className="mt-10 w-full max-w-[500px] rounded-sm overflow-hidden">
-        <div className="bg-[#1e4b8e] py-2 px-4">
-          <H6 className="text-white">Login to Admin Access</H6>
-        </div>
+    <PageLayout
+      title="Admin Login"
+      className="flex-1 flex items-center justify-center"
+    >
+      <div className="max-w-md w-full space-y-8">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign in to your account
+        </h2>
 
         <Form
           schema={schema}
           initialValues={initialValue}
-          className="py-4 px-4 border"
+          // className="py-4 px-4"
           submitButton={{
             title: "Sign In",
-            className: "bg-[#0d6efd] text-sm text-white px-2 py-1",
           }}
           onSubmit={async (values) => {
-            const res = await axios.post("/admin/login", values);
+            const res = await axios.post("/auth/login", values);
 
             if (res?.message) {
               showSuccessToast(res.message);
@@ -55,7 +56,7 @@ const Home = () => {
             }
           }}
         >
-          <Input label="Username" name="username" />
+          <Input label="Employee ID" name="id" />
           <Input label="Password" name="password" type="password" />
         </Form>
       </div>

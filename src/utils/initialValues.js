@@ -7,6 +7,7 @@ export const initialFacultyValues = {
   email: "",
   image: "",
   designation: "",
+  role: "",
   department: DEPARTMENT[0],
   school: "",
   educationalDetails: [

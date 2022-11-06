@@ -30,15 +30,23 @@ const Form = ({
       }}
     >
       {({ handleSubmit, isSubmitting, handleReset, isValid, dirty }) => (
-        <form onSubmit={handleSubmit} {...props}>
-          <div className={clsx("grid gap-y-3 w-full", className)}>
-            {children}
-          </div>
+        <form
+          onSubmit={handleSubmit}
+          className={clsx("grid gap-y-3 w-full", className)}
+          {...props}
+        >
+          {children}
 
           {(submitButton || resetButton) && (
-            <div className={clsx("bg-[#00000008] px-4 py-2", actionClassName)}>
+            <div className={clsx("", actionClassName)}>
               {submitButton && (
-                <button type="submit" className={submitButton.className}>
+                <button
+                  type="submit"
+                  className={clsx(
+                    "w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none",
+                    submitButton.className
+                  )}
+                >
                   {submitButton.title}
                 </button>
               )}

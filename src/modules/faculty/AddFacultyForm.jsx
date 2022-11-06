@@ -10,7 +10,7 @@ import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaboratio
 import { useRouter } from "next/router";
 import { showSuccessAlert } from "@utils/alert";
 import Select from "@elements/Select";
-import { DEPARTMENT } from "@utils/constants";
+import { DEPARTMENT, FACULTYROLE } from "@utils/constants";
 
 export const Divider = () => <StackDivider p={2} />;
 
@@ -72,13 +72,20 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           <Input label="Designation" name="designation" required />
 
           <Input label="School / Center" name="school" required />
-          {/* <Input label="Department" name="department" required /> */}
+
           <Select
             label="Department"
             name="department"
             required
             value={DEPARTMENT[0]}
             options={DEPARTMENT}
+          />
+
+          <Select
+            label="Role"
+            name="role"
+            value={FACULTYROLE[0]}
+            options={FACULTYROLE}
           />
 
           <Input label="Email" name="email" disabled={isUpdate} />

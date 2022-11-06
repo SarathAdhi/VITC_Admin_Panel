@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@lib/axios";
 import create from "zustand";
 
 export const appStore = create((set) => ({
@@ -20,14 +20,11 @@ export const appStore = create((set) => ({
     }
 
     try {
-      const { data } = await axios.post(
-        process.env.SERVER_BASE_URL + "/admin/verify",
-        { token }
-      );
+      const { isAuth, user } = await axios.post("/auth/verify", { token });
 
-      console.log(data);
+      console.log({ isAuth });
 
-      set({ isAuth: data.isAuth });
+      set({ isAuth, user });
     } catch ({ error }) {
       console.log("error");
 

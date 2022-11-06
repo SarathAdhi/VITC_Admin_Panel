@@ -6,3 +6,5 @@ export const DEPARTMENT = [
   "Analytics",
   "IoT",
 ];
+
+export const FACULTYROLE = ["FACULTY", "ADMIN", "SUPERADMIN"];

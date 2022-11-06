@@ -40,7 +40,7 @@ const handleSubmit = async ({ values, isUpdate }) => {
     return;
   }
 
-  await axios.post("/faculty", {
+  await axios.post("/faculty/create", {
     ...newValues,
   });
 };
