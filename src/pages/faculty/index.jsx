@@ -9,7 +9,6 @@ const ViewFaculties = () => {
   async function getFacutlies() {
     try {
       const faculties = await axios.get("/faculty");
-      console.log(faculties);
       setFaculties(faculties);
     } catch ({ error }) {
       if (error) {

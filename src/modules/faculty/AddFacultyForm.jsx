@@ -34,8 +34,6 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
             showSuccessAlert(
               "Faculty added successfully",
               "",
-              "View Faculty",
-              () => router.push("/faculty"),
               "Add more Faculty",
               () => router.reload()
             );
@@ -64,9 +62,10 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           <Select
             label="Salutation"
             name="salutation"
-            value={SALUTATION[0]}
             options={SALUTATION}
+            required
           />
+
           <Input label="Name" name="name" required />
           <Input label="Email" name="email" disabled={isUpdate} />
 
@@ -77,15 +76,9 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
             label="Department"
             name="department"
             required
-            value={DEPARTMENT[0]}
             options={DEPARTMENT}
           />
-          <Select
-            label="Role"
-            name="role"
-            value={FACULTYROLE[0]}
-            options={FACULTYROLE}
-          />
+          <Select label="Role" name="role" options={FACULTYROLE} />
         </Form.Grid3>
 
         <Divider />

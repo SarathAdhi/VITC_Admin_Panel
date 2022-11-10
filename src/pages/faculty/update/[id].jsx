@@ -16,7 +16,6 @@ const UpdateFaculty = () => {
 
   async function getFaculty() {
     const faculty = await axios.get(`/faculty/${id}`);
-    console.log(faculty);
 
     setFacultyDetails({
       ...faculty,

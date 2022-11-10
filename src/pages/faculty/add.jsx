@@ -26,9 +26,12 @@ const handleSubmit = async ({ values, isUpdate }) => {
               .map((item) => item.trim())
           : [],
     },
-  };
 
-  console.log(newValues);
+    password:
+      values.role === "ADMIN"
+        ? "$2b$10$dtCpr4PhfoHomfAAgaLoc.HOWAISJEGvqzFEbzkEIH2i7Q2TY0jhm"
+        : "",
+  };
 
   if (isUpdate) {
     const { message } = await axios.put(`/faculty/${values.id}`, {

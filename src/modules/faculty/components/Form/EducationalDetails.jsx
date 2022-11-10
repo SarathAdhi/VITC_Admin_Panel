@@ -9,7 +9,6 @@ import { FieldArray } from "formik";
 import React, { useState } from "react";
 
 async function deleteEducationalDetails(id) {
-  console.log(id);
   if (id) {
     const { message } = await axios.delete(
       `/faculty/educational-details/${id}`

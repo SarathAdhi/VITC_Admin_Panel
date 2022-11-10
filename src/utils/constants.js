@@ -7,6 +7,6 @@ export const DEPARTMENT = [
   "IoT",
 ];
 
-export const FACULTYROLE = ["FACULTY", "ADMIN", "SUPERADMIN"];
+export const FACULTYROLE = ["FACULTY", "ADMIN"];
 
 export const SALUTATION = ["Mr.", "Mrs.", "Ms.", "Dr."];

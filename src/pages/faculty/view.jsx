@@ -89,4 +89,4 @@ const ViewFaculty = () => {
   );
 };
 
-export default withAuth(ViewFaculty);
+export default ViewFaculty;

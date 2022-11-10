@@ -1,13 +1,13 @@
-import { DEPARTMENT } from "./constants";
+import { DEPARTMENT, FACULTYROLE, SALUTATION } from "./constants";
 
 export const initialFacultyValues = {
   id: "",
-  salutation: "",
+  salutation: SALUTATION[0],
   name: "",
   email: "",
   image: "",
   designation: "",
-  role: "",
+  role: FACULTYROLE[0],
   department: DEPARTMENT[0],
   school: "",
   educationalDetails: [
