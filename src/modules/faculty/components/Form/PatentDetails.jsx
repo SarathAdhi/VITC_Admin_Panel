@@ -17,7 +17,7 @@ export const PatentDetails = ({ initialValues, isUpdate }) => {
 
   return (
     <>
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Selected Patent Published Details
         </H5>
@@ -89,7 +89,7 @@ export const PatentDetails = ({ initialValues, isUpdate }) => {
 
       <Divider />
 
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Selected Patent Granted Details
         </H5>

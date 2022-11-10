@@ -1,49 +1,84 @@
 import { LinkedItem } from "@elements/LinkedItem";
 import { H6 } from "@elements/Text";
 import {
+  CheckCircleIcon,
   PresentationChartBarIcon,
   UserAddIcon,
   UserGroupIcon,
 } from "@heroicons/react/solid";
 import clsx from "clsx";
 import React from "react";
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from "@chakra-ui/react";
 
-export const LeftSideBar = ({ className }) => {
+const pages = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    Icon: PresentationChartBarIcon,
+  },
+  {
+    name: "View Approvals",
+    href: "/approvals",
+    Icon: CheckCircleIcon,
+  },
+  {
+    name: "Add Faculty",
+    href: "/faculty/add",
+    Icon: UserAddIcon,
+  },
+  {
+    name: "Edit / View Faculty",
+    href: "/faculty/view",
+    Icon: UserGroupIcon,
+  },
+];
+
+const SlideOver = ({ isLeftSideBarOpen, setIsLeftSideBarOpen }) => {
   return (
-    <div
-      // 48px is header size (h-12)
-      className={clsx(
-        "md:h-screen bg-[#222429] flex flex-col gap-5 py-6 px-4 md:px-8",
-        className
-      )}
+    <Drawer
+      isOpen={isLeftSideBarOpen}
+      placement="left"
+      onClose={() => setIsLeftSideBarOpen(false)}
     >
-      <H6 className="text-gray-700">CORE LINKS</H6>
+      <DrawerOverlay />
+      <DrawerContent>
+        <DrawerHeader>
+          <DrawerCloseButton />
+          <H6>CORE LINKS</H6>
+        </DrawerHeader>
 
-      <div className="grid gap-2">
-        <LinkedItem
-          href="/"
-          className="text-gray-500 font-semibold text-xl flex items-center gap-2"
-        >
-          <PresentationChartBarIcon className="w-6 h-6" />
-          Dashboard
-        </LinkedItem>
+        <DrawerBody mt={5}>
+          <div className="grid gap-5">
+            {pages.map(({ name, href, Icon }) => (
+              <LinkedItem
+                key={name}
+                href={href}
+                className="text-gray-600 font-semibold text-xl flex items-center gap-2"
+              >
+                <Icon className="w-6 h-6" />
+                {name}
+              </LinkedItem>
+            ))}
+          </div>
+        </DrawerBody>
+      </DrawerContent>
+    </Drawer>
+  );
+};
 
-        <LinkedItem
-          href="/faculty/add"
-          className="text-gray-500 font-semibold text-xl flex items-center gap-2"
-        >
-          <UserAddIcon className="w-6 h-6" />
-          Add Faculty
-        </LinkedItem>
-
-        <LinkedItem
-          href="/faculty/view"
-          className="text-gray-500 font-semibold text-xl flex items-center gap-2"
-        >
-          <UserGroupIcon className="w-6 h-6" />
-          Edit / View Faculty
-        </LinkedItem>
-      </div>
-    </div>
+export const LeftSideBar = ({ isLeftSideBarOpen, setIsLeftSideBarOpen }) => {
+  return (
+    <SlideOver
+      isLeftSideBarOpen={isLeftSideBarOpen}
+      setIsLeftSideBarOpen={setIsLeftSideBarOpen}
+    />
   );
 };

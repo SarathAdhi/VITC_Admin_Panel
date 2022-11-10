@@ -28,7 +28,7 @@ const ViewFaculties = () => {
         {faculties.map((faculty) => (
           <div key={faculty.name} className="w-full sm:w-60">
             <div className="relative w-full h-60">
-              <Image src={faculty?.image} layout="fill" />
+              {faculty?.image && <Image src={faculty.image} layout="fill" />}
             </div>
 
             <div className="text-white text-center bg-[#433840] py-4">

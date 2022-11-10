@@ -31,7 +31,7 @@ const handleSubmit = async ({ values, isUpdate }) => {
   console.log(newValues);
 
   if (isUpdate) {
-    const { message } = await axios.put(`/faculty/${values.uuid}`, {
+    const { message } = await axios.put(`/faculty/${values.id}`, {
       ...newValues,
     });
 

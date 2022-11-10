@@ -30,7 +30,7 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
 
   return (
     <>
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Selected Book / Book Chapter Published Details
         </H5>
@@ -109,7 +109,7 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
 
       <Divider />
 
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Selected Awards & Recognition Details
         </H5>
@@ -169,7 +169,7 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
 
       <Divider />
 
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Major International Collaborations
         </H5>
@@ -241,7 +241,7 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
 
       <Divider />
 
-      <div className="bg-[#6e747d] p-2 flex items-center justify-between">
+      <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">
           Major Industry Collaborations
         </H5>

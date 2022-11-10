@@ -25,7 +25,7 @@ export const appStore = create((set) => ({
       console.log({ isAuth });
 
       set({ isAuth, user });
-    } catch ({ error }) {
+    } catch (err) {
       console.log("error");
 
       localStorage.removeItem("token");

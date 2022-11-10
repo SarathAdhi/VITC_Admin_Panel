@@ -6,8 +6,8 @@ import { PageLoader } from "@components/PageLoader";
 
 const theme = extendTheme({
   fonts: {
-    body: `'Saira Extra Condensed', sans-serif`,
-    heading: `'Saira Extra Condensed', sans-serif`,
+    body: `'Poppins', sans-serif`,
+    heading: `'Poppins', sans-serif`,
   },
 });
 

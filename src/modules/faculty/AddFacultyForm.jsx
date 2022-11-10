@@ -10,7 +10,7 @@ import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaboratio
 import { useRouter } from "next/router";
 import { showSuccessAlert } from "@utils/alert";
 import Select from "@elements/Select";
-import { DEPARTMENT, FACULTYROLE } from "@utils/constants";
+import { DEPARTMENT, FACULTYROLE, SALUTATION } from "@utils/constants";
 
 export const Divider = () => <StackDivider p={2} />;
 
@@ -18,7 +18,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
   const router = useRouter();
 
   return (
-    <div className="grid gap-2 border">
+    <div className="w-full grid gap-2 border">
       <div className="bg-[#1e4b8e] py-2 px-4">
         <H4 className="text-white">Faculty Profile</H4>
       </div>
@@ -43,8 +43,8 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
         }}
         initialValues={initialValues}
         submitButton={{
-          title: isUpdate ? "Update Faculty" : "Save Profile",
-          className: "bg-[#408557] text-white px-4 py-2",
+          title: isUpdate ? "Update Faculty" : "Add Faculty",
+          className: "bg-[#008000] hover:bg-[#408557] text-white px-4 py-2",
         }}
       >
         <P className="!font-semibold">
@@ -55,22 +55,22 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           </span>
         </P>
 
-        <div className="bg-[#6e747d] p-2">
+        <div className="bg-[#6e747d] p-2 rounded-md">
           <H5 className="!font-semibold text-white">Employee Details</H5>
         </div>
 
         <Form.Grid3>
           <Input label="Employee Id" name="id" required disabled={isUpdate} />
-          <Input
+          <Select
             label="Salutation"
             name="salutation"
-            required
-            disabled={isUpdate}
+            value={SALUTATION[0]}
+            options={SALUTATION}
           />
-
           <Input label="Name" name="name" required />
-          <Input label="Designation" name="designation" required />
+          <Input label="Email" name="email" disabled={isUpdate} />
 
+          <Input label="Designation" name="designation" required />
           <Input label="School / Center" name="school" required />
 
           <Select
@@ -80,15 +80,12 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
             value={DEPARTMENT[0]}
             options={DEPARTMENT}
           />
-
           <Select
             label="Role"
             name="role"
             value={FACULTYROLE[0]}
             options={FACULTYROLE}
           />
-
-          <Input label="Email" name="email" disabled={isUpdate} />
         </Form.Grid3>
 
         <Divider />
@@ -97,7 +94,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
         <Divider />
 
-        <div className="bg-[#6e747d] p-2">
+        <div className="bg-[#6e747d] p-2 rounded-md">
           <H5 className="!font-semibold text-white">
             Post Doctoral Experience Details
           </H5>
@@ -111,7 +108,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
         <Divider />
 
-        <div className="bg-[#6e747d] p-2">
+        <div className="bg-[#6e747d] p-2 rounded-md">
           <H5 className="!font-semibold text-white">Research Details</H5>
         </div>
 
@@ -178,7 +175,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
         <Divider />
 
-        <div className="bg-[#6e747d] p-2">
+        <div className="bg-[#6e747d] p-2 rounded-md">
           <H5 className="!font-semibold text-white">Other Details</H5>
         </div>
 
@@ -198,7 +195,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
         <Divider />
 
-        <div className="bg-[#6e747d] p-2">
+        <div className="bg-[#6e747d] p-2 rounded-md">
           <H5 className="!font-semibold text-white">Photo Link</H5>
         </div>
 

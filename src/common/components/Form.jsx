@@ -38,12 +38,12 @@ const Form = ({
           {children}
 
           {(submitButton || resetButton) && (
-            <div className={clsx("", actionClassName)}>
+            <div className={clsx("grid", actionClassName)}>
               {submitButton && (
                 <button
                   type="submit"
                   className={clsx(
-                    "w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none",
+                    "mt-1 w-full justify-center rounded-md border border-transparent bg-indigo-600 py-1 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none",
                     submitButton.className
                   )}
                 >

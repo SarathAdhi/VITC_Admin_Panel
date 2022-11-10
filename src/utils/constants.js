@@ -8,3 +8,5 @@ export const DEPARTMENT = [
 ];
 
 export const FACULTYROLE = ["FACULTY", "ADMIN", "SUPERADMIN"];
+
+export const SALUTATION = ["Mr.", "Mrs.", "Ms.", "Dr."];

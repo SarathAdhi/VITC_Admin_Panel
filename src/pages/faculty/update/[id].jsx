@@ -15,23 +15,16 @@ const UpdateFaculty = () => {
   const { id } = router.query;
 
   async function getFaculty() {
-    try {
-      const faculty = await axios.get(`/faculty/${id}`);
-      console.log(faculty);
+    const faculty = await axios.get(`/faculty/${id}`);
+    console.log(faculty);
 
-      setFacultyDetails({
-        ...faculty,
-        researchDetails: {
-          ...faculty.researchDetails,
-          specialization: faculty.researchDetails.specialization.join(","),
-        },
-      });
-    } catch ({ error }) {
-      console.log({ error });
-      if (error) {
-        // router.replace("/");
-      }
-    }
+    setFacultyDetails({
+      ...faculty,
+      researchDetails: {
+        ...faculty.researchDetails,
+        specialization: faculty.researchDetails?.specialization?.join(","),
+      },
+    });
 
     setIsLoading(false);
   }
@@ -40,7 +33,7 @@ const UpdateFaculty = () => {
     if (id) getFaculty();
   }, [id]);
 
-  console.log(facultyDetails);
+  console.log({ facultyDetails });
 
   if (isLoading) return <PageLoader />;
 
@@ -49,7 +42,11 @@ const UpdateFaculty = () => {
       {!facultyDetails ? (
         <H2 className="text-center">Faculty not found with ID: {id}</H2>
       ) : (
-        <InternalStaffForm initialValues={facultyDetails} isUpdate />
+        <InternalStaffForm
+          initialValues={facultyDetails}
+          submitButtonTitle="Update Faculty"
+          isUpdate
+        />
       )}
     </PageLayout>
   );
