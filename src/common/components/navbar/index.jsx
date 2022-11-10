@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 export const Navbar = ({ setIsLeftSideBarOpen }) => {
   const router = useRouter();
-  const { user, logout, isAuth } = appStore();
+  const { user, logout, isAuth, notificationCount } = appStore();
 
   if (!isAuth) return;
 
@@ -37,7 +37,7 @@ export const Navbar = ({ setIsLeftSideBarOpen }) => {
           <BellIcon className="w-6 h-6 text-white" />
 
           <span className="absolute top-0 right-0 text-xs bg-red-500 w-5 h-5 grid place-content-center text-white rounded-full">
-            1
+            {notificationCount}
           </span>
         </LinkedItem>
 

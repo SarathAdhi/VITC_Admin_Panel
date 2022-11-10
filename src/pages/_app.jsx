@@ -13,10 +13,11 @@ const theme = extendTheme({
 
 const MyApp = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { getProfile } = appStore();
+  const { getProfile, getNotifications } = appStore();
 
   const fetchAuth = async () => {
     await getProfile();
+    await getNotifications();
     setIsLoading(false);
   };
 

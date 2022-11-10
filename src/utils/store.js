@@ -32,6 +32,16 @@ export const appStore = create((set) => ({
     }
   },
 
+  notificationCount: 0,
+
+  getNotifications: async () => {
+    const notificationCount = await axios.get(
+      "/faculty/approvals?isApproved=false"
+    );
+
+    set({ notificationCount: notificationCount.length });
+  },
+
   logout: () => {
     localStorage.removeItem("token");
     set({ isAuth: false });
