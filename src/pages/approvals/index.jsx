@@ -9,8 +9,10 @@ import { showSuccessToast } from "@utils/toast";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { appStore } from "@utils/store";
 
 const Approval = () => {
+  const { getNotifications } = appStore();
   const [unApprovedFaculties, setUnApprovedFaculties] = useState([]);
   const [approvedFaculties, setApprovedFaculties] = useState([]);
 
@@ -38,6 +40,7 @@ const Approval = () => {
     const { message } = await axios.put(`/faculty/approve/${id}`);
 
     showSuccessToast(message);
+    getNotifications();
     getApprovals();
   };
 
@@ -45,6 +48,7 @@ const Approval = () => {
     const { message } = await axios.put(`/faculty/un-approve/${id}`);
 
     showSuccessToast(message);
+    getNotifications();
     getApprovals();
   };
 
@@ -96,7 +100,7 @@ const Approval = () => {
               ))}
             </TabPanel>
 
-            <TabPanel>
+            <TabPanel className="grid gap-4">
               {approvedFaculties.map((faculty) => (
                 <div
                   key={faculty.uuid}
