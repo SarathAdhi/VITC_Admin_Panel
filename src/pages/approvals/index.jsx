@@ -57,7 +57,7 @@ const Approval = () => {
       <PageCard title="Approval" className="grid gap-4">
         <Tabs variant="solid-rounded" colorScheme="blue">
           <TabList gap={5}>
-            <Tab>Un-approved Faculties</Tab>
+            <Tab>Pending Approvals</Tab>
             <Tab>Approved Faculties</Tab>
           </TabList>
 
