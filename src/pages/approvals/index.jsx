@@ -1,6 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { LinkedItem } from "@elements/LinkedItem";
-import { H3, H4, P } from "@elements/Text";
+import { H4, P } from "@elements/Text";
 import withAuth from "@hoc/withAuth";
 import { PageCard } from "@layouts/PageCard";
 import { PageLayout } from "@layouts/PageLayout";
