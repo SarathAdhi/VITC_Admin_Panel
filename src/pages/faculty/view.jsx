@@ -54,14 +54,12 @@ const initialValue = {
 const ViewFaculty = () => {
   const router = useRouter();
 
-  const [faculty, setFaculty] = useState(null);
-
   return (
     <PageLayout
       title="View Faculty"
       className="grid justify-items-center gap-5"
     >
-      <div className="mt-10 w-full max-w-[500px] rounded-sm overflow-hidden">
+      <div className="mt-10 w-full max-w-[500px] rounded-md overflow-hidden">
         <div className="bg-[#1e4b8e] py-2 px-4">
           <H6 className="text-white">Enter to Edit / View Faculty</H6>
         </div>
@@ -69,10 +67,10 @@ const ViewFaculty = () => {
         <Form
           schema={schema}
           initialValues={initialValue}
-          className="py-4 px-4 border"
+          className="py-4 px-4 border border-gray-400 rounded-b-md place-items-center"
           submitButton={{
             title: "View Faculty",
-            className: "bg-[#0d6efd] text-sm text-white px-2 py-1",
+            className: "bg-[#0d6efd] hover:bg-[#0d6efd] text-sm text-white p-2",
           }}
           onSubmit={async (values) => {
             router.push(`/faculty/update/${values.id}`);
@@ -80,13 +78,16 @@ const ViewFaculty = () => {
             // setFaculty(res);
           }}
         >
-          <Input label="Employee Id" name="id" />
+          <Input
+            className="w-full"
+            label="Employee Id"
+            name="id"
+            placeholder="Search for faculty by ID"
+          />
         </Form>
       </div>
-
-      {/* {faculty && <FacultyDetails faculty={faculty} />} */}
     </PageLayout>
   );
 };
 
-export default ViewFaculty;
+export default withAuth(ViewFaculty);

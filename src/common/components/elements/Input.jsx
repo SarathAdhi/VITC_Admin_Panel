@@ -43,7 +43,7 @@ const Input = ({
         {(msg) => (
           <div
             role="alert"
-            className="text-sm font-medium text-[#ff0000] -z-10"
+            className="mt-0.5 text-sm font-semibold text-[#ff0000] -z-10"
           >
             {msg}
           </div>

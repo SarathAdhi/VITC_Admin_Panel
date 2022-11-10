@@ -43,7 +43,7 @@ const Form = ({
                 <button
                   type="submit"
                   className={clsx(
-                    "mt-1 w-full justify-center rounded-md border border-transparent bg-indigo-600 py-1 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none",
+                    "mt-1 w-full justify-center rounded-md border border-transparent duration-200 bg-indigo-600 py-1 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none",
                     submitButton.className
                   )}
                 >

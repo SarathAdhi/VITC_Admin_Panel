@@ -47,11 +47,11 @@ export const Navbar = ({ setIsLeftSideBarOpen }) => {
               {user?.image ? (
                 <img src={user?.image} className="w-8 h-8 rounded-full" />
               ) : (
-                <UserIcon className="w-5 h-5" />
+                <UserIcon className="w-6 h-6" />
               )}
 
               <div className="hidden sm:flex">
-                <Label className="!text-white">{user?.role}</Label>
+                <Label className="!text-white">{user?.name}</Label>
 
                 <ChevronDownIcon className="w-5 h-5" />
               </div>
