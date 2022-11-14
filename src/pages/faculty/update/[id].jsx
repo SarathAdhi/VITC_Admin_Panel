@@ -32,8 +32,6 @@ const UpdateFaculty = () => {
     if (id) getFaculty();
   }, [id]);
 
-  console.log({ facultyDetails });
-
   if (isLoading) return <PageLoader />;
 
   return (

@@ -16,9 +16,9 @@ const MyApp = ({ Component, pageProps }) => {
   const { getProfile, getNotifications } = appStore();
 
   const fetchAuth = async () => {
-    await getProfile();
-    await getNotifications();
-    setIsLoading(false);
+    Promise.all([getNotifications(), getProfile()]).then(() =>
+      setIsLoading(false)
+    );
   };
 
   useEffect(() => {

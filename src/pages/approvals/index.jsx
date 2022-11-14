@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Spinner } from "@chakra-ui/react";
 import { LinkedItem } from "@elements/LinkedItem";
 import { H4, P } from "@elements/Text";
 import withAuth from "@hoc/withAuth";
@@ -12,24 +12,30 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { appStore } from "@utils/store";
 
 const Approval = () => {
-  const { getNotifications } = appStore();
+  const { getNotifications, user } = appStore();
   const [unApprovedFaculties, setUnApprovedFaculties] = useState([]);
   const [approvedFaculties, setApprovedFaculties] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  console.log({ user });
 
   const getApprovals = async () => {
     try {
       const _unApprovedFaculties = await axios.get(
-        "/faculty/approvals?isApproved=false"
+        `/faculty/approvals?isApproved=false&school=${user?.school}`
       );
       setUnApprovedFaculties(_unApprovedFaculties);
 
       const _approvedFaculties = await axios.get(
-        "/faculty/approvals?isApproved=true"
+        `/faculty/approvals?isApproved=true&school=${user?.school}`
       );
+
       setApprovedFaculties(_approvedFaculties);
     } catch (error) {
       console.log(error);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -62,80 +68,88 @@ const Approval = () => {
           </TabList>
 
           <TabPanels>
-            <TabPanel className="grid gap-4">
-              {unApprovedFaculties.map((faculty) => (
-                <div
-                  key={faculty.uuid}
-                  className="flex items-center justify-between bg-gray-300 px-3 py-2 rounded-md"
-                >
-                  <LinkedItem
-                    className="flex items-center gap-3"
-                    href={`/approvals/${faculty.id}`}
+            <TabPanel className="grid gap-4" px={0}>
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                unApprovedFaculties.map((faculty) => (
+                  <div
+                    key={faculty.uuid}
+                    className="flex items-center justify-between bg-gray-300 px-3 py-2 rounded-md"
                   >
-                    <Image
-                      width={40}
-                      height={40}
-                      src={faculty.image || "/assets/blank-profile.webp"}
-                      className="rounded-full"
-                    />
-
-                    <div>
-                      <H4>{faculty.name}</H4>
-                      <P>ID: {faculty.id}</P>
-                    </div>
-                  </LinkedItem>
-
-                  <div className="flex gap-5">
-                    <Button
-                      bgColor={"green"}
-                      _hover={{ bgColor: "green.600" }}
-                      _active={{ bgColor: "green.500" }}
-                      color={"white"}
-                      onClick={() => approveFaculty(faculty.id)}
+                    <LinkedItem
+                      className="flex items-center gap-3"
+                      href={`/approvals/${faculty.id}`}
                     >
-                      Approve
-                    </Button>
+                      <Image
+                        width={40}
+                        height={40}
+                        src={faculty.image || "/assets/blank-profile.webp"}
+                        className="rounded-full"
+                      />
+
+                      <div>
+                        <H4>{faculty.name}</H4>
+                        <P>ID: {faculty.id}</P>
+                      </div>
+                    </LinkedItem>
+
+                    <div className="flex gap-5">
+                      <Button
+                        bgColor={"green"}
+                        _hover={{ bgColor: "green.600" }}
+                        _active={{ bgColor: "green.500" }}
+                        color={"white"}
+                        onClick={() => approveFaculty(faculty.id)}
+                      >
+                        Approve
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </TabPanel>
 
             <TabPanel className="grid gap-4">
-              {approvedFaculties.map((faculty) => (
-                <div
-                  key={faculty.uuid}
-                  className="flex items-center justify-between bg-gray-300 px-3 py-2 rounded-md"
-                >
-                  <LinkedItem
-                    className="flex items-center gap-3"
-                    href={`/approvals/${faculty.id}`}
+              {isLoading ? (
+                <Spinner />
+              ) : (
+                approvedFaculties.map((faculty) => (
+                  <div
+                    key={faculty.uuid}
+                    className="flex items-center justify-between bg-gray-300 px-3 py-2 rounded-md"
                   >
-                    <Image
-                      width={40}
-                      height={40}
-                      src={faculty.image || "/assets/blank-profile.webp"}
-                      className="rounded-full"
-                    />
-
-                    <div>
-                      <H4>{faculty.name}</H4>
-                      <P>ID: {faculty.id}</P>
-                    </div>
-                  </LinkedItem>
-
-                  <div className="flex gap-5">
-                    <Button
-                      bgColor={"red"}
-                      _hover={{ bgColor: "red.600" }}
-                      _active={{ bgColor: "red.500" }}
-                      color={"white"}
-                      onClick={() => unApproveFaculty(faculty.id)}
+                    <LinkedItem
+                      className="flex items-center gap-3"
+                      href={`/approvals/${faculty.id}`}
                     >
-                      Un-Approve
-                    </Button>
+                      <Image
+                        width={40}
+                        height={40}
+                        src={faculty.image || "/assets/blank-profile.webp"}
+                        className="rounded-full"
+                      />
+
+                      <div>
+                        <H4>{faculty.name}</H4>
+                        <P>ID: {faculty.id}</P>
+                      </div>
+                    </LinkedItem>
+
+                    <div className="flex gap-5">
+                      <Button
+                        bgColor={"red"}
+                        _hover={{ bgColor: "red.600" }}
+                        _active={{ bgColor: "red.500" }}
+                        color={"white"}
+                        onClick={() => unApproveFaculty(faculty.id)}
+                      >
+                        Un-Approve
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </TabPanel>
           </TabPanels>
         </Tabs>

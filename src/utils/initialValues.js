@@ -1,4 +1,4 @@
-import { DEPARTMENT, FACULTYROLE, SALUTATION } from "./constants";
+import { DEPARTMENT, DESIGNATION, FACULTYROLE, SALUTATION } from "./constants";
 
 export const initialFacultyValues = {
   id: "",
@@ -6,7 +6,7 @@ export const initialFacultyValues = {
   name: "",
   email: "",
   image: "",
-  designation: "",
+  designation: DESIGNATION[0],
   role: FACULTYROLE[0],
   department: DEPARTMENT[0],
   school: "",

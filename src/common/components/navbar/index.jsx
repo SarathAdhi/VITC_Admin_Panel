@@ -17,8 +17,6 @@ export const Navbar = ({ setIsLeftSideBarOpen }) => {
 
   if (!isAuth) return;
 
-  console.log(user);
-
   return (
     <header className="z-50 px-4 py-2 fixed w-full bg-[#004c93] flex justify-between gap-2 flex-row items-center">
       <div className="flex items-center justify-between sm:justify-start gap-5">

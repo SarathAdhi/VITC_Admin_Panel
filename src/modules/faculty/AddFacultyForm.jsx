@@ -10,7 +10,18 @@ import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaboratio
 import { useRouter } from "next/router";
 import { showSuccessAlert } from "@utils/alert";
 import Select from "@elements/Select";
-import { DEPARTMENT, FACULTYROLE, SALUTATION } from "@utils/constants";
+import {
+  DEPARTMENT,
+  DESIGNATION,
+  FACULTYROLE,
+  SALUTATION,
+} from "@utils/constants";
+import ListInput from "@elements/ListInput";
+
+const department = DEPARTMENT.map((value) => ({ value, label: value }));
+const designation = DESIGNATION.map((value) => ({ value, label: value }));
+const facultyRole = FACULTYROLE.map((value) => ({ value, label: value }));
+const salutation = SALUTATION.map((value) => ({ value, label: value }));
 
 export const Divider = () => <StackDivider p={2} />;
 
@@ -27,7 +38,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
         className="px-3"
         actionClassName="flex justify-end"
         onSubmit={(values, reset) => {
-          handleSubmit({ values });
+          handleSubmit({ values, reset });
 
           if (!isUpdate) {
             reset();
@@ -35,7 +46,9 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
               "Faculty added successfully",
               "",
               "Add more Faculty",
-              () => router.reload()
+              () => {},
+              "View Faculty",
+              () => router.push("/faculty")
             );
           }
         }}
@@ -59,26 +72,32 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
 
         <Form.Grid3>
           <Input label="Employee Id" name="id" required disabled={isUpdate} />
-          <Select
+
+          <ListInput
             label="Salutation"
             name="salutation"
-            options={SALUTATION}
+            options={salutation}
             required
           />
 
           <Input label="Name" name="name" required />
           <Input label="Email" name="email" disabled={isUpdate} />
 
-          <Input label="Designation" name="designation" required />
+          <ListInput
+            label="Designation"
+            name="designation"
+            options={designation}
+            required
+          />
           <Input label="School / Center" name="school" required />
 
-          <Select
-            label="Department"
+          <ListInput
+            options={department}
             name="department"
+            label="Department"
             required
-            options={DEPARTMENT}
           />
-          <Select label="Role" name="role" options={FACULTYROLE} />
+          <ListInput options={facultyRole} label="Role" name="role" required />
         </Form.Grid3>
 
         <Divider />

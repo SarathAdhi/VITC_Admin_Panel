@@ -6,7 +6,7 @@ import axios from "@lib/axios";
 import withAuth from "@hoc/withAuth";
 import { initialFacultyValues } from "@utils/initialValues";
 
-const handleSubmit = async ({ values, isUpdate }) => {
+const handleSubmit = async ({ values, reset, isUpdate }) => {
   const newValues = {
     ...values,
     educationalDetails:
@@ -46,6 +46,7 @@ const handleSubmit = async ({ values, isUpdate }) => {
   await axios.post("/faculty/create", {
     ...newValues,
   });
+  reset();
 };
 
 const InternalStaffForm = ({ initialValues, isUpdate = false }) => (
