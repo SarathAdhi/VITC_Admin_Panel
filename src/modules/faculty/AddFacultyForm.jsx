@@ -81,7 +81,7 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           />
 
           <Input label="Name" name="name" required />
-          <Input label="Email" name="email" disabled={isUpdate} />
+          <Input label="Email" name="email" disabled={isUpdate} required />
 
           <ListInput
             label="Designation"
