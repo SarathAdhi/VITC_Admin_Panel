@@ -1,18 +1,20 @@
 import { PageLoader } from "@components/PageLoader";
 import { H2 } from "@elements/Text";
-import withAdmin from "@hoc/withAdmin";
+import withAuth from "@hoc/withAuth";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
+import { appStore } from "@utils/store";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { InternalStaffForm } from "../add";
+import { InternalStaffForm } from "./faculty/add";
 
-const UpdateFaculty = () => {
+const UpdateProfile = () => {
   const router = useRouter();
   const [facultyDetails, setFacultyDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { id } = router.query;
+  const { user } = appStore();
+  const { id } = user;
 
   async function getFaculty() {
     const faculty = await axios.get(`/faculty/${id}`);
@@ -30,7 +32,7 @@ const UpdateFaculty = () => {
 
   useEffect(() => {
     if (id) getFaculty();
-  }, [id]);
+  }, []);
 
   if (isLoading) return <PageLoader />;
 
@@ -41,7 +43,7 @@ const UpdateFaculty = () => {
       ) : (
         <InternalStaffForm
           initialValues={facultyDetails}
-          submitButtonTitle="Update Faculty"
+          submitBtnTitle="Update Profile"
           isUpdate
         />
       )}
@@ -49,4 +51,4 @@ const UpdateFaculty = () => {
   );
 };
 
-export default withAdmin(UpdateFaculty);
+export default withAuth(UpdateProfile);

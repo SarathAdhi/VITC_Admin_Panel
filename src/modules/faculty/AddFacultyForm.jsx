@@ -7,9 +7,6 @@ import { EducationalDetails } from "./components/Form/EducationalDetails";
 import { ProjectDetails } from "./components/Form/ProjectDetails";
 import { PatentDetails } from "./components/Form/PatentDetails";
 import { AwardsAndCollaborations } from "./components/Form/AwardsAndCollaborations";
-import { useRouter } from "next/router";
-import { showSuccessAlert } from "@utils/alert";
-import Select from "@elements/Select";
 import {
   DEPARTMENT,
   DESIGNATION,
@@ -18,16 +15,19 @@ import {
 } from "@utils/constants";
 import ListInput from "@elements/ListInput";
 
-const department = DEPARTMENT.map((value) => ({ value, label: value }));
+// const department = DEPARTMENT.map((value) => ({ value, label: value }));
 const designation = DESIGNATION.map((value) => ({ value, label: value }));
 const facultyRole = FACULTYROLE.map((value) => ({ value, label: value }));
 const salutation = SALUTATION.map((value) => ({ value, label: value }));
 
 export const Divider = () => <StackDivider p={2} />;
 
-export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
-  const router = useRouter();
-
+export const AddFacultyForm = ({
+  initialValues,
+  handleSubmit,
+  isUpdate,
+  submitBtnTitle = "",
+}) => {
   return (
     <div className="w-full grid gap-2 border">
       <div className="bg-[#1e4b8e] py-2 px-4">
@@ -39,22 +39,14 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
         actionClassName="flex justify-end"
         onSubmit={(values, reset) => {
           handleSubmit({ values, reset });
-
-          if (!isUpdate) {
-            reset();
-            showSuccessAlert(
-              "Faculty added successfully",
-              "",
-              "Add more Faculty",
-              () => {},
-              "View Faculty",
-              () => router.push("/faculty")
-            );
-          }
         }}
         initialValues={initialValues}
         submitButton={{
-          title: isUpdate ? "Update Faculty" : "Add Faculty",
+          title: submitBtnTitle
+            ? submitBtnTitle
+            : isUpdate
+            ? "Update Faculty"
+            : "Add Faculty",
           className: "bg-[#008000] hover:bg-[#408557] text-white px-4 py-2",
         }}
       >
@@ -91,12 +83,12 @@ export const AddFacultyForm = ({ initialValues, handleSubmit, isUpdate }) => {
           />
           <Input label="School / Center" name="school" required />
 
-          <ListInput
+          {/* <ListInput
             options={department}
             name="department"
             label="Department"
             required
-          />
+          /> */}
           <ListInput options={facultyRole} label="Role" name="role" required />
         </Form.Grid3>
 

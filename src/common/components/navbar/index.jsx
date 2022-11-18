@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 export const Navbar = ({ setIsLeftSideBarOpen }) => {
   const router = useRouter();
-  const { user, logout, isAuth, notificationCount } = appStore();
+  const { user, logout, isAuth, isAdmin, notificationCount } = appStore();
 
   if (!isAuth) return;
 
@@ -30,16 +30,18 @@ export const Navbar = ({ setIsLeftSideBarOpen }) => {
       </div>
 
       <div className="flex items-center gap-5">
-        <LinkedItem
-          href="/approvals"
-          className="flex relative items-center p-2"
-        >
-          <BellIcon className="w-6 h-6 text-white" />
+        {isAdmin && (
+          <LinkedItem
+            href="/approvals"
+            className="flex relative items-center p-2"
+          >
+            <BellIcon className="w-6 h-6 text-white" />
 
-          <span className="absolute top-0 right-0 text-xs bg-red-500 w-5 h-5 grid place-content-center text-white rounded-full">
-            {notificationCount}
-          </span>
-        </LinkedItem>
+            <span className="absolute top-0 right-0 text-xs bg-red-500 w-5 h-5 grid place-content-center text-white rounded-full">
+              {notificationCount}
+            </span>
+          </LinkedItem>
+        )}
 
         <Menu placement="bottom">
           <MenuButton as={"button"}>

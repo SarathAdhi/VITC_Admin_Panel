@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import { PageLoader } from "@components/PageLoader";
 import { H2 } from "@elements/Text";
-import withAuth from "@hoc/withAuth";
+import withAdmin from "@hoc/withAdmin";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
 import { showSuccessToast } from "@utils/toast";
@@ -87,4 +87,4 @@ const FacultyApprovalPage = () => {
   );
 };
 
-export default withAuth(FacultyApprovalPage);
+export default withAdmin(FacultyApprovalPage);

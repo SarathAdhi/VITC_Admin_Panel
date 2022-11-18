@@ -1,7 +1,7 @@
 import Form from "@components/Form";
 import Input from "@elements/Input";
 import { H6 } from "@elements/Text";
-import withAuth from "@hoc/withAuth";
+import withAdmin from "@hoc/withAdmin";
 import { PageLayout } from "@layouts/PageLayout";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -14,42 +14,6 @@ const schema = y.object().shape({
 const initialValue = {
   id: "",
 };
-
-// const FacultyDetails = ({ faculty }) => {
-//   const {
-//     id,
-//     salutation,
-//     name,
-//     email,
-//     image,
-//     designation,
-//     department,
-//     school,
-//     educationalDetails,
-//     postDoctoralExperience,
-//     researchDetails,
-//     consultancyProjectDetails,
-//     completedConsultancyProjectDetails,
-//     ongoingFundedProjectDetails,
-//     completedFundedProjectDetails,
-//     patentPublishedDetails,
-//     patentGrantedDetails,
-//     bookPublishedDetails,
-//     awardDetails,
-//     majorInternationalCollaborationsDetails,
-//     majorIndustryCollaborationsDetails,
-//     editorialExperience,
-//     personalWebsite,
-//   } = faculty;
-//   return (
-//     <div>
-//       <p>{id}</p>
-//       <p>{salutation}</p>
-//       <p>{name}</p>
-//       <p>{email}</p>
-//     </div>
-//   );
-// };
 
 const ViewFaculty = () => {
   const router = useRouter();
@@ -90,4 +54,4 @@ const ViewFaculty = () => {
   );
 };
 
-export default withAuth(ViewFaculty);
+export default withAdmin(ViewFaculty);

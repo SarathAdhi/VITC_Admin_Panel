@@ -3,10 +3,12 @@ import React from "react";
 import { AddFacultyForm } from "@modules/faculty/AddFacultyForm";
 import { showSuccessToast } from "@utils/toast";
 import axios from "@lib/axios";
-import withAuth from "@hoc/withAuth";
 import { initialFacultyValues } from "@utils/initialValues";
+import { showSuccessAlert } from "@utils/alert";
+import { useRouter } from "next/router";
+import withAdmin from "@hoc/withAdmin";
 
-const handleSubmit = async ({ values, reset, isUpdate }) => {
+const handleSubmit = async ({ values, reset, isUpdate, router }) => {
   const newValues = {
     ...values,
     educationalDetails:
@@ -43,28 +45,48 @@ const handleSubmit = async ({ values, reset, isUpdate }) => {
     return;
   }
 
-  await axios.post("/faculty/create", {
-    ...newValues,
-  });
-  reset();
+  try {
+    await axios.post("/faculty/create", {
+      ...newValues,
+    });
+
+    reset();
+
+    showSuccessAlert(
+      "Faculty added successfully",
+      "",
+      "Add more Faculty",
+      () => {},
+      "View Faculty",
+      () => router.push("/faculty")
+    );
+  } catch (error) {}
 };
 
-const InternalStaffForm = ({ initialValues, isUpdate = false }) => (
+const InternalStaffForm = ({
+  initialValues,
+  isUpdate = false,
+  router,
+  submitBtnTitle = "",
+}) => (
   <AddFacultyForm
     initialValues={initialValues}
     isUpdate={isUpdate}
-    handleSubmit={(props) => handleSubmit({ ...props, isUpdate })}
+    submitBtnTitle={submitBtnTitle}
+    handleSubmit={(props) => handleSubmit({ ...props, isUpdate, router })}
   />
 );
 
 const AddStaff = ({ initialValues = initialFacultyValues }) => {
+  const router = useRouter();
+
   return (
     <PageLayout title="Add Faculty">
-      <InternalStaffForm initialValues={initialValues} />
+      <InternalStaffForm initialValues={initialValues} router={router} />
     </PageLayout>
   );
 };
 
 export { InternalStaffForm };
 
-export default withAuth(AddStaff);
+export default withAdmin(AddStaff);

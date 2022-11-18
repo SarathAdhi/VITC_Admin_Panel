@@ -20,4 +20,12 @@ axios.interceptors.response.use(
   }
 );
 
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+
+  config.headers.Authorization = token ? token : "dummy-token";
+
+  return config;
+});
+
 export default axios;

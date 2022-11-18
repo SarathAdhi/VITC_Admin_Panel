@@ -21,7 +21,7 @@ const initialValue = {
 
 const Home = () => {
   const router = useRouter();
-  const { isAuth, setIsAuth } = appStore();
+  const { isAuth, setIsAuth, getProfile } = appStore();
 
   useEffect(() => {
     if (isAuth) router.replace("/dashboard");
@@ -49,10 +49,12 @@ const Home = () => {
             const res = await axios.post("/auth/login", values);
 
             if (res?.message) {
+              localStorage.setItem("token", res.token);
+
               showSuccessToast(res.message);
+              await getProfile();
               setIsAuth(true);
 
-              localStorage.setItem("token", res.token);
               router.replace("/dashboard");
             }
           }}

@@ -16,7 +16,7 @@ const MyApp = ({ Component, pageProps }) => {
   const { getProfile, getNotifications } = appStore();
 
   const fetchAuth = async () => {
-    Promise.all([getNotifications(), getProfile()]).then(() =>
+    Promise.all([getNotifications(), getProfile()]).finally(() =>
       setIsLoading(false)
     );
   };

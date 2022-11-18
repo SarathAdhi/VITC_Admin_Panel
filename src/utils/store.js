@@ -8,23 +8,20 @@ export const appStore = create((set) => ({
   },
 
   isAuth: false,
+  isAdmin: false,
+
   setIsAuth: async (isAuth) => {
     set({ isAuth });
   },
 
   getProfile: async () => {
-    const token = localStorage.getItem("token") || "dummy-token";
-
-    if (!token) {
-      return;
-    }
-
     try {
-      const { isAuth, user } = await axios.post("/auth/verify", { token });
+      const { isAuth, user } = await axios.get("/auth/verify");
 
-      console.log({ isAuth });
-
-      set({ isAuth, user });
+      set((state) => {
+        state.getNotifications();
+        return { isAuth, user, isAdmin: user.role === "ADMIN" };
+      });
     } catch (err) {
       console.log("error");
 

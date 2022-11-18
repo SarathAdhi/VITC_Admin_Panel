@@ -1,7 +1,6 @@
 import { Button, Spinner } from "@chakra-ui/react";
 import { LinkedItem } from "@elements/LinkedItem";
 import { H4, P } from "@elements/Text";
-import withAuth from "@hoc/withAuth";
 import { PageCard } from "@layouts/PageCard";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
@@ -10,6 +9,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { appStore } from "@utils/store";
+import withAdmin from "@hoc/withAdmin";
 
 const Approval = () => {
   const { getNotifications, user } = appStore();
@@ -22,12 +22,12 @@ const Approval = () => {
   const getApprovals = async () => {
     try {
       const _unApprovedFaculties = await axios.get(
-        `/faculty/approvals?isApproved=false&school=${user?.school}`
+        `/faculty/approvals?isApproved=false`
       );
       setUnApprovedFaculties(_unApprovedFaculties);
 
       const _approvedFaculties = await axios.get(
-        `/faculty/approvals?isApproved=true&school=${user?.school}`
+        `/faculty/approvals?isApproved=true`
       );
 
       setApprovedFaculties(_approvedFaculties);
@@ -110,7 +110,7 @@ const Approval = () => {
               )}
             </TabPanel>
 
-            <TabPanel className="grid gap-4">
+            <TabPanel className="grid gap-4" px={0}>
               {isLoading ? (
                 <Spinner />
               ) : (
@@ -158,4 +158,4 @@ const Approval = () => {
   );
 };
 
-export default withAuth(Approval);
+export default withAdmin(Approval);

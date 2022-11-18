@@ -8,7 +8,7 @@ export const initialFacultyValues = {
   image: "",
   designation: DESIGNATION[0],
   role: FACULTYROLE[0],
-  department: DEPARTMENT[0],
+  // department: DEPARTMENT[0],
   school: "",
   educationalDetails: [
     {
