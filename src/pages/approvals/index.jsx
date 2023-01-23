@@ -16,6 +16,7 @@ const Approval = () => {
   const [unApprovedFaculties, setUnApprovedFaculties] = useState([]);
   const [approvedFaculties, setApprovedFaculties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [userAction, setUserAction] = useState({ id: "", isLoading: false });
 
   console.log({ user });
 
@@ -43,19 +44,25 @@ const Approval = () => {
   }, []);
 
   const approveFaculty = async (id) => {
+    setUserAction({ id, isLoading: true });
+
     const { message } = await axios.put(`/faculty/approve/${id}`);
 
     showSuccessToast(message);
     getNotifications();
     getApprovals();
+    setUserAction({ id: "", isLoading: false });
   };
 
   const unApproveFaculty = async (id) => {
+    setUserAction({ id, isLoading: true });
+
     const { message } = await axios.put(`/faculty/un-approve/${id}`);
 
     showSuccessToast(message);
     getNotifications();
     getApprovals();
+    setUserAction({ id: "", isLoading: false });
   };
 
   return (
@@ -101,6 +108,9 @@ const Approval = () => {
                         _active={{ bgColor: "green.500" }}
                         color={"white"}
                         onClick={() => approveFaculty(faculty.id)}
+                        isLoading={
+                          userAction.id === faculty.id && userAction.isLoading
+                        }
                       >
                         Approve
                       </Button>
@@ -143,6 +153,9 @@ const Approval = () => {
                         _active={{ bgColor: "red.500" }}
                         color={"white"}
                         onClick={() => unApproveFaculty(faculty.id)}
+                        isLoading={
+                          userAction.id === faculty.id && userAction.isLoading
+                        }
                       >
                         Un-Approve
                       </Button>
