@@ -1,3 +1,4 @@
+import { Badge } from "@chakra-ui/react";
 import Form from "@components/Form";
 import Input from "@elements/Input";
 import { H5 } from "@elements/Text";
@@ -18,7 +19,11 @@ async function deleteEducationalDetails(id) {
   }
 }
 
-export const EducationalDetails = ({ initialValues, isUpdate }) => {
+export const EducationalDetails = ({
+  initialValues,
+  isUpdate,
+  isValueChanged,
+}) => {
   const [educationalDetailsCount, setEducationalDetailsCount] = useState(
     initialValues.educationalDetails.length || 1
   );
@@ -28,14 +33,18 @@ export const EducationalDetails = ({ initialValues, isUpdate }) => {
       <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
         <H5 className="!font-semibold text-white">Educational Details</H5>
 
-        <button
-          type="button"
-          onClick={() => setEducationalDetailsCount((pre) => pre + 1)}
-          className="flex items-center gap-1 p-1 font-semibold bg-yellow-500"
-        >
-          <PlusCircleIcon className="w-6 h-6" />
-          Add More
-        </button>
+        <div className="flex gap-3 items-center">
+          {isValueChanged && <Badge colorScheme="yellow">MODIFIED</Badge>}
+
+          <button
+            type="button"
+            onClick={() => setEducationalDetailsCount((pre) => pre + 1)}
+            className="flex items-center gap-1 p-1 font-semibold bg-yellow-500"
+          >
+            <PlusCircleIcon className="w-6 h-6" />
+            Add More
+          </button>
+        </div>
       </div>
 
       <FieldArray name="educationalDetails">

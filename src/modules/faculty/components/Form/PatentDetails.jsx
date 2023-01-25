@@ -6,8 +6,13 @@ import { H5 } from "@elements/Text";
 import clsx from "clsx";
 import { Divider } from "@modules/faculty/AddFacultyForm";
 import { PlusIcon } from "@heroicons/react/solid";
+import { Badge } from "@chakra-ui/react";
 
-export const PatentDetails = ({ initialValues, isUpdate }) => {
+export const PatentDetails = ({
+  initialValues,
+  isUpdate,
+  updatedDifference,
+}) => {
   const [patentPublishedDetailsCount, setPatentPublishedDetailsCount] =
     useState(initialValues.patentPublishedDetails.length || 1);
 
@@ -23,7 +28,11 @@ export const PatentDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["patentPublishedDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setPatentPublishedDetailsCount(parseInt(e.target.value))
@@ -96,7 +105,11 @@ export const PatentDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["patentGrantedDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setPatentGrantedDetailsCount(parseInt(e.target.value))

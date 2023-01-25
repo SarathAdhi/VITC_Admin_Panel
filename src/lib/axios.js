@@ -11,9 +11,12 @@ const axios = Axios.create({
 axios.interceptors.response.use(
   (response) => response.data,
   (error) => {
+    const isError_Object = typeof error?.response?.data?.error === "object";
+
     showErrorAlert(
-      JSON.stringify(error?.response?.data?.error) ||
-        "Could not connect to server"
+      isError_Object
+        ? JSON.stringify(error?.response?.data?.error)
+        : error?.response?.data?.error || "Could not connect to server"
     );
 
     return Promise.reject(error?.response?.data);

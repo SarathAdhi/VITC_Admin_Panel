@@ -8,6 +8,7 @@ const Input = ({
   label,
   className,
   inputClassName,
+  isValueChanged,
   ...inputProps
 }) => {
   const [input] = useField(name);
@@ -35,6 +36,7 @@ const Input = ({
           !inputProps.disabled &&
             !inputProps.readOnly &&
             "focus:ring-primary-500 focus:border-primary-500",
+          isValueChanged && "bg-yellow-100",
           inputClassName
         )}
       />

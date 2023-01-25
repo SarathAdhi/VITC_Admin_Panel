@@ -6,8 +6,13 @@ import { H5 } from "@elements/Text";
 import clsx from "clsx";
 import { Divider } from "@modules/faculty/AddFacultyForm";
 import { PlusIcon } from "@heroicons/react/solid";
+import { Badge } from "@chakra-ui/react";
 
-export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
+export const AwardsAndCollaborations = ({
+  initialValues,
+  isUpdate,
+  updatedDifference,
+}) => {
   const [bookPublishedDetailsCount, setBookPublishedDetailsCount] = useState(
     initialValues.bookPublishedDetails.length || 1
   );
@@ -36,7 +41,11 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["bookPublishedDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setBookPublishedDetailsCount(parseInt(e.target.value))
@@ -116,6 +125,10 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
+          {updatedDifference["awardDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
           <PlusIcon className="w-5 h-5 text-white" />
           <select
             onChange={(e) => setAwardDetailsCount(parseInt(e.target.value))}
@@ -177,6 +190,10 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
+          {updatedDifference["majorInternationalCollaborationsDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
           <PlusIcon className="w-5 h-5 text-white" />
           <select
             onChange={(e) =>
@@ -250,6 +267,10 @@ export const AwardsAndCollaborations = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
+          {updatedDifference["majorIndustryCollaborationsDetails"] && (
+            <Badge colorScheme="yellow">MODIFIED</Badge>
+          )}
+
           <PlusIcon className="w-5 h-5 text-white" />
           <select
             onChange={(e) =>

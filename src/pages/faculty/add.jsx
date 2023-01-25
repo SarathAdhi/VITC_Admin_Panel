@@ -1,7 +1,7 @@
 import { PageLayout } from "@layouts/PageLayout";
 import React from "react";
 import { AddFacultyForm } from "@modules/faculty/AddFacultyForm";
-import { showSuccessToast } from "@utils/toast";
+import { showErrorToast, showSuccessToast } from "@utils/toast";
 import axios from "@lib/axios";
 import { initialFacultyValues } from "@utils/initialValues";
 import { showSuccessAlert } from "@utils/alert";
@@ -32,15 +32,22 @@ const handleSubmit = async ({ values, reset, isUpdate, router }) => {
     password:
       values.role === "ADMIN"
         ? "$2b$10$dtCpr4PhfoHomfAAgaLoc.HOWAISJEGvqzFEbzkEIH2i7Q2TY0jhm"
-        : "",
+        : "$2b$10$DqkPSuFsxHQcZzDMFXjlI.KdIETO9k6yL30N2UEGrFyYG10VnAQdK",
   };
 
-  if (isUpdate) {
-    const { message } = await axios.put(`/faculty/${values.id}`, {
-      ...newValues,
-    });
+  // Password for admin - admin
+  // Password for faculty - faculty
 
-    showSuccessToast(message);
+  if (isUpdate) {
+    try {
+      const { message } = await axios.put(`/faculty/${values.id}`, {
+        ...newValues,
+      });
+
+      showSuccessToast(message);
+    } catch ({ error }) {
+      showErrorToast(error);
+    }
 
     return;
   }

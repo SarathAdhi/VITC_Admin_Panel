@@ -1,4 +1,4 @@
-import { Button, Spinner } from "@chakra-ui/react";
+import { Badge, Button, Spinner } from "@chakra-ui/react";
 import { LinkedItem } from "@elements/LinkedItem";
 import { H4, P } from "@elements/Text";
 import { PageCard } from "@layouts/PageCard";
@@ -101,7 +101,11 @@ const Approval = () => {
                       </div>
                     </LinkedItem>
 
-                    <div className="flex gap-5">
+                    <div className="flex items-center gap-5">
+                      {faculty?.isModified && (
+                        <Badge colorScheme="yellow">Modified</Badge>
+                      )}
+
                       <Button
                         bgColor={"green"}
                         _hover={{ bgColor: "green.600" }}

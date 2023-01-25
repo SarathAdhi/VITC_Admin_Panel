@@ -6,8 +6,13 @@ import { H5 } from "@elements/Text";
 import clsx from "clsx";
 import { Divider } from "@modules/faculty/AddFacultyForm";
 import { PlusIcon } from "@heroicons/react/solid";
+import { Badge } from "@chakra-ui/react";
 
-export const ProjectDetails = ({ initialValues, isUpdate }) => {
+export const ProjectDetails = ({
+  initialValues,
+  isUpdate,
+  updatedDifference,
+}) => {
   const [
     onGoingConsultancyProjectDetailsCount,
     setOnGoingConsultancyProjectDetailsCount,
@@ -36,7 +41,11 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["ongoingConsultancyProjectDetails"] && (
+            <Badge colorScheme="yellow">Modified</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setOnGoingConsultancyProjectDetailsCount(parseInt(e.target.value))
@@ -112,7 +121,11 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["completedConsultancyProjectDetails"] && (
+            <Badge colorScheme="yellow">Modified</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setCompletedConsultancyProjectDetailsCount(
@@ -190,7 +203,11 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["ongoingFundedProjectDetails"] && (
+            <Badge colorScheme="yellow">Modified</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setOngoingFundedProjectDetailsCount(parseInt(e.target.value))
@@ -269,7 +286,11 @@ export const ProjectDetails = ({ initialValues, isUpdate }) => {
         </H5>
 
         <div className="flex items-center gap-1">
-          <PlusIcon className="w-5 h-5 text-white" />
+          {updatedDifference["completedFundedProjectDetails"] && (
+            <Badge colorScheme="yellow">Modified</Badge>
+          )}
+
+          <PlusIcon className="ml-2 w-5 h-5 text-white" />
           <select
             onChange={(e) =>
               setCompletedFundedProjectDetailsCount(parseInt(e.target.value))
