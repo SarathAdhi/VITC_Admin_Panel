@@ -55,6 +55,15 @@ export const AddFacultyForm = ({
     ...updatedDifference.updated,
   };
 
+  let entries = Object.entries(updatedDifference);
+
+  entries = entries.map((e) => {
+    let x = { ...e[1], changed: true };
+    return [e[0], x];
+  });
+
+  updatedDifference = Object.fromEntries(entries);
+
   if (isLoading) return <PageLoader />;
 
   return (

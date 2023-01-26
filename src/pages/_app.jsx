@@ -13,12 +13,11 @@ const theme = extendTheme({
 
 const MyApp = ({ Component, pageProps }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const { getProfile, getNotifications } = appStore();
+  const { getProfile } = appStore();
 
   const fetchAuth = async () => {
-    Promise.all([getNotifications(), getProfile()]).finally(() =>
-      setIsLoading(false)
-    );
+    await getProfile();
+    setIsLoading(false);
   };
 
   useEffect(() => {

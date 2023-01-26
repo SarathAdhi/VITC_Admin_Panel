@@ -22,14 +22,12 @@ const Approval = () => {
 
   const getApprovals = async () => {
     try {
-      const _unApprovedFaculties = await axios.get(
-        `/faculty/approvals?isApproved=false`
-      );
+      const faculties = await axios.get(`/faculty/approvals`);
+
+      const _unApprovedFaculties = faculties.filter((e) => !e.isApproved);
       setUnApprovedFaculties(_unApprovedFaculties);
 
-      const _approvedFaculties = await axios.get(
-        `/faculty/approvals?isApproved=true`
-      );
+      const _approvedFaculties = faculties.filter((e) => e.isApproved);
 
       setApprovedFaculties(_approvedFaculties);
     } catch (error) {

@@ -23,8 +23,6 @@ export const appStore = create((set) => ({
         return { isAuth, user, isAdmin: user.role === "ADMIN" };
       });
     } catch (err) {
-      console.log("error");
-
       localStorage.removeItem("token");
     }
   },
@@ -32,11 +30,12 @@ export const appStore = create((set) => ({
   notificationCount: 0,
 
   getNotifications: async () => {
-    const notificationCount = await axios.get(
-      "/faculty/approvals?isApproved=false"
-    );
+    try {
+      let notification = await axios.get("/faculty/approvals");
+      const unApprovedFaculties = notification?.filter((e) => !e.isApproved);
 
-    set({ notificationCount: notificationCount.length });
+      set({ notificationCount: unApprovedFaculties?.length });
+    } catch (error) {}
   },
 
   logout: () => {
