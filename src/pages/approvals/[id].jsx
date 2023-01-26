@@ -4,6 +4,7 @@ import { H2 } from "@elements/Text";
 import withAdmin from "@hoc/withAdmin";
 import { PageLayout } from "@layouts/PageLayout";
 import axios from "@lib/axios";
+import { appStore } from "@utils/store";
 import { showSuccessToast } from "@utils/toast";
 import { useRouter } from "next/router";
 import { InternalStaffForm } from "pages/faculty/add";
@@ -13,6 +14,7 @@ const FacultyApprovalPage = () => {
   const router = useRouter();
   const [facultyDetails, setFacultyDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { getNotifications } = appStore();
 
   const { id } = router.query;
 
@@ -43,6 +45,8 @@ const FacultyApprovalPage = () => {
 
     setFacultyDetails({ ...facultyDetails, isApproved: true });
 
+    getNotifications();
+
     showSuccessToast(message);
   };
 
@@ -52,6 +56,8 @@ const FacultyApprovalPage = () => {
     );
 
     setFacultyDetails({ ...facultyDetails, isApproved: false });
+
+    getNotifications();
 
     showSuccessToast(message);
   };

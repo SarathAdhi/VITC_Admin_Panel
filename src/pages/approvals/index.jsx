@@ -12,13 +12,11 @@ import { appStore } from "@utils/store";
 import withAdmin from "@hoc/withAdmin";
 
 const Approval = () => {
-  const { getNotifications, user } = appStore();
+  const { getNotifications } = appStore();
   const [unApprovedFaculties, setUnApprovedFaculties] = useState([]);
   const [approvedFaculties, setApprovedFaculties] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userAction, setUserAction] = useState({ id: "", isLoading: false });
-
-  console.log({ user });
 
   const getApprovals = async () => {
     try {
@@ -48,6 +46,7 @@ const Approval = () => {
 
     showSuccessToast(message);
     getNotifications();
+
     getApprovals();
     setUserAction({ id: "", isLoading: false });
   };
