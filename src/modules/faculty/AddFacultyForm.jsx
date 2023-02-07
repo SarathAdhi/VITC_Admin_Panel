@@ -29,7 +29,7 @@ export const AddFacultyForm = ({
 }) => {
   const { isAdmin } = appStore();
   const [oldFacultyDetails, setOldFacultyDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(isUpdate ? true : false);
 
   useEffect(() => {
     if (isUpdate)
@@ -47,22 +47,28 @@ export const AddFacultyForm = ({
         .finally(() => setIsLoading(false));
   }, []);
 
-  let updatedDifference = detailedDiff(oldFacultyDetails, initialValues);
+  let updatedDifference = isUpdate
+    ? detailedDiff(oldFacultyDetails, initialValues)
+    : {};
+
+  console.log({ updatedDifference });
 
   updatedDifference = {
-    ...updatedDifference.added,
-    ...updatedDifference.deleted,
-    ...updatedDifference.updated,
+    ...updatedDifference?.added,
+    ...updatedDifference?.deleted,
+    ...updatedDifference?.updated,
   };
 
   let entries = Object.entries(updatedDifference);
 
   entries = entries.map((e) => {
-    let x = { ...e[1], changed: true };
+    let x = typeof e[1] === "string" ? e[1] : { ...e[1], changed: true };
     return [e[0], x];
   });
 
-  updatedDifference = Object.fromEntries(entries);
+  updatedDifference = isUpdate ? Object.fromEntries(entries) : {};
+
+  console.log({ updatedDifference });
 
   if (isLoading) return <PageLoader />;
 
@@ -205,7 +211,7 @@ export const AddFacultyForm = ({
         <div className="bg-[#6e747d] p-2 rounded-md flex items-center justify-between">
           <H5 className="!font-semibold text-white">Research Details</H5>
 
-          {updatedDifference["postDoctoralExperience"] && (
+          {updatedDifference["researchDetails"] && (
             <Badge colorScheme="yellow">MODIFIED</Badge>
           )}
         </div>
